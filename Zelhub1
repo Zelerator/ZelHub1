@@ -1865,8 +1865,8 @@ end
 function CheckQuest() 
 	local MyLevel = game.Players.LocalPlayer.Data.Level.Value
     if World1 then
-		if MyLevel == 1 or MyLevel <= 9 or _G.Select_Mob_Farm == "Bandit [Lv. 5]" then -- Bandit
-			Ms = "Bandit [Lv. 5]"
+		if MyLevel == 1 or MyLevel <= 9 or _G.Select_Mob_Farm == "Bandit" then -- Bandit
+			Ms = "Bandit"
 			NameQuest = "BanditQuest1"
 			LevelQuest = 1
 			NameMon = "Bandit"
@@ -1874,31 +1874,31 @@ function CheckQuest()
 			CFrameMon = CFrame.new(1199.31287, 52.2717781, 1536.91516, -0.929782331, 6.60215846e-08, -0.368109822, 3.9077392e-08, 1, 8.06501603e-08, 0.368109822, 6.06023249e-08, -0.929782331)
 			SPAWNPOINT = "Default"
         elseif MyLevel == 10 or MyLevel <= 14 or _G.Select_Mob_Farm == "Monkey [Lv. 14]" then -- Monkey
-			Ms = "Monkey [Lv. 14]"
+			Ms = "Monkey"
 			NameQuest = "JungleQuest"
 			LevelQuest = 1
 			NameMon = "Monkey"
 			CFrameQuest = CFrame.new(-1604.12012, 36.8521118, 154.23732, 0.0648873374, -4.70858913e-06, -0.997892559, 1.41431883e-07, 1, -4.70933674e-06, 0.997892559, 1.64442184e-07, 0.0648873374)
 			CFrameMon = CFrame.new(-1502.74609, 98.5633316, 90.6417007, 0.836947978, 0, 0.547282517, -0, 1, -0, -0.547282517, 0, 0.836947978)
 			SPAWNPOINT = "Jungle"
-		elseif MyLevel == 15 or MyLevel <= 29 or _G.Select_Mob_Farm == "Gorilla [Lv. 20]" then -- Gorilla
-			Ms = "Gorilla [Lv. 20]"
+		elseif MyLevel == 15 or MyLevel <= 29 or _G.Select_Mob_Farm == "Gorilla" then -- Gorilla
+			Ms = "Gorilla"
 			NameQuest = "JungleQuest"
 			LevelQuest = 2
 			NameMon = "Gorilla"
 			CFrameQuest = CFrame.new(-1604.12012, 36.8521118, 154.23732, 0.0648873374, -4.70858913e-06, -0.997892559, 1.41431883e-07, 1, -4.70933674e-06, 0.997892559, 1.64442184e-07, 0.0648873374)
 			CFrameMon = CFrame.new(-1223.52808, 6.27936459, -502.292664, 0.310949147, -5.66602516e-08, 0.950426519, -3.37275488e-08, 1, 7.06501808e-08, -0.950426519, -5.40241736e-08, 0.310949147)
 			SPAWNPOINT = "Jungle"
-		elseif MyLevel == 30 or MyLevel <= 39 or _G.Select_Mob_Farm == "Pirate [Lv. 35]" then -- Pirate
-			Ms = "Pirate [Lv. 35]"
+		elseif MyLevel == 30 or MyLevel <= 39 or _G.Select_Mob_Farm == "Pirate" then -- Pirate
+			Ms = "Pirate"
 			NameQuest = "BuggyQuest1"
 			LevelQuest = 1
 			NameMon = "Pirate"
 			CFrameQuest = CFrame.new(-1139.59717, 4.75205183, 3825.16211, -0.959730506, -7.5857054e-09, 0.280922383, -4.06310328e-08, 1, -1.11807175e-07, -0.280922383, -1.18718916e-07, -0.959730506)
 			CFrameMon = CFrame.new(-1219.32324, 4.75205183, 3915.63452, -0.966492832, -6.91238853e-08, 0.25669381, -5.21195496e-08, 1, 7.3047012e-08, -0.25669381, 5.72206496e-08, -0.966492832)
 			SPAWNPOINT = "Pirate"
-		elseif MyLevel == 40 or MyLevel <= 59 or _G.Select_Mob_Farm == "Brute [Lv. 45]" then -- Brute
-			Ms = "Brute [Lv. 45]"
+		elseif MyLevel == 40 or MyLevel <= 59 or _G.Select_Mob_Farm == "Brute" then -- Brute
+			Ms = "Brute"
 			NameQuest = "BuggyQuest1"
 			LevelQuest = 2
 			NameMon = "Brute"
