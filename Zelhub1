@@ -3345,41 +3345,41 @@ function checkselect()
             --CFrameQuest = CFrame.new(-1927.9107666015625, 37.79813003540039, -12843.78515625)
             CFrameMon = CFrame.new(-2203.302490234375, 109.90937042236328, -12788.7333984375)
 			--Spawn = "Loaf"
-		elseif MyLevel == 2300 or MyLevel <= 2324 or SelectMonster == "Cocoa Warrior [Lv. 2300]" then
-            Mon = "Cocoa Warrior [Lv. 2300]"
+		elseif MyLevel == 2300 or MyLevel <= 2324 or SelectMonster == "Cocoa Warrior" then
+            Mon = "Cocoa Warrior"
             --NameQuest = "ChocQuest1"
             LevelQuest = 1
             NameMon = "Cocoa Warrior"
             --CFrameQuest = CFrame.new(231.13571166992188, 24.734268188476562, -12195.1162109375)
             CFrameMon = CFrame.new(231.13571166992188, 24.734268188476562, -12195.1162109375)
 			--Spawn = "Chocolate"
-		elseif MyLevel == 2325 or MyLevel <= 2349 or SelectMonster == "Chocolate Bar Battler [Lv. 2325]" then
-            Mon = "Chocolate Bar Battler [Lv. 2325]"
+		elseif MyLevel == 2325 or MyLevel <= 2349 or SelectMonster == "Chocolate Bar Battler" then
+            Mon = "Chocolate Bar Battler"
             --NameQuest = "ChocQuest1"
             LevelQuest = 2
             NameMon = "Chocolate Bar Battler"
             --CFrameQuest = CFrame.new(231.13571166992188, 24.734268188476562, -12195.1162109375)
             CFrameMon = CFrame.new(231.13571166992188, 24.734268188476562, -12195.1162109375)
 			--Spawn = "Chocolate"
-		elseif MyLevel == 2350 or MyLevel <= 2374 or SelectMonster == "Sweet Thief [Lv. 2350]" then
-            Mon = "Sweet Thief [Lv. 2350]"
+		elseif MyLevel == 2350 or MyLevel <= 2374 or SelectMonster == "Sweet Thief" then
+            Mon = "Sweet Thief"
             --NameQuest = "ChocQuest2"
             LevelQuest = 1
             NameMon = "Sweet Thief"
             --CFrameQuest = CFrame.new(147.52256774902344, 24.793832778930664, -12775.3583984375)
             CFrameMon = CFrame.new(147.52256774902344, 24.793832778930664, -12775.3583984375)
 			--Spawn = "Chocolate"
-		elseif MyLevel == 2375 or MyLevel <= 2400 or SelectMonster == "Candy Rebel [Lv. 2375]" then
-            Mon = "Candy Rebel [Lv. 2375]"
+		elseif MyLevel == 2375 or MyLevel <= 2400 or SelectMonster == "Candy Rebel" then
+            Mon = "Candy Rebel"
             --NameQuest = "ChocQuest2"
             LevelQuest = 2
             NameMon = "Candy Rebel"
             --CFrameQuest = CFrame.new(147.52256774902344, 24.793832778930664, -12775.3583984375)
             CFrameMon = CFrame.new(147.52256774902344, 24.793832778930664, -12775.3583984375)
 			--Spawn = "Chocolate"
-elseif MyLevel == 2400 or MyLevel <= 2424 or SelectMonster == "Candy Pirate [Lv. 2400]" then
+elseif MyLevel == 2400 or MyLevel <= 2424 or SelectMonster == "Candy Pirate" then
 
-            Mon = "Candy Pirate [Lv. 2400]"
+            Mon = "Candy Pirate"
             QuestName = "CandyQuest1"
 
             LevelQuest = 1
@@ -3390,7 +3390,7 @@ elseif MyLevel == 2400 or MyLevel <= 2424 or SelectMonster == "Candy Pirate [Lv.
 
             CFrameQuest = CFrame.new(-1149, 13, -14445)
             VectorQuest = Vector3.new(-1149, 13, -14445)
-        elseif MyLevel >= 2425 or SelectMonster == "Snow Demon [Lv. 2425]" then
+        elseif MyLevel >= 2425 or SelectMonster == "Snow Demon" then
 
 
             Mon = "Snow Demon [Lv. 2425]"
