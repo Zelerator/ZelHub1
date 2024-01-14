@@ -15,7 +15,7 @@ local ThunderImageUI = Instance.new("ImageLabel")
         ThunderToggleUI.Size = UDim2.new(0, 50, 0, 50)
         ThunderToggleUI.Font = Enum.Font.SourceSans
         ThunderToggleUI.Text = ""
-        ThunderToggleUI.TextColor3 = Color3.fromRGB(255, 255, 255)
+        ThunderToggleUI.TextColor3 = Color3.fromRGB(0, 0, 0)
         ThunderToggleUI.TextSize = 14.000
         ThunderToggleUI.Draggable = true
         ThunderToggleUI.MouseButton1Click:Connect(function()
@@ -2114,7 +2114,7 @@ function CheckQuest()
 			CFrameQuest = CFrame.new(632.698608, 73.1055908, 918.666321, -0.0319722369, 8.96074881e-10, -0.999488771, 1.36326533e-10, 1, 8.92172336e-10, 0.999488771, -1.07732087e-10, -0.0319722369)
 			CFrameMon = CFrame.new(296.786499, 72.9948196, -57.1298141, -0.876037002, -5.32364979e-08, 0.482243896, -3.87658332e-08, 1, 3.99718729e-08, -0.482243896, 1.63222538e-08, -0.876037002)
 			SPAWNPOINT = "DressTown"
-		elseif MyLevel == 875 or MyLevel <= 899 or _G.Select_Mob_Farm == "Marine Lieutenant" then -- Marine Lieutenant [Lv. 875]
+		elseif MyLevel == 875 or MyLevel <= 899 or _G.Select_Mob_Farm == "Marine Lieutenan" then -- Marine Lieutenant [Lv. 875]
 			Ms = "Marine Lieutenant"
 			NameQuest = "MarineQuest3"
 			LevelQuest = 1
@@ -3826,7 +3826,7 @@ spawn(function()
  while wait() do
  if _G.Auto_Farm_Ectoplasm then
  pcall(function()
-  if game:GetService("Workspace").Enemies:FindFirstChild("Ship Deckhand") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Engineer") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Steward") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Officer") then
+  if game:GetService("Workspace").Enemies:FindFirstChild("Ship Deckhand [Lv. 1250]") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Engineer [Lv. 1275]") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Steward [Lv. 1300]") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Officer [Lv. 1325]") then
   for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
   if string.find(v.Name, "Ship") then
   repeat wait()
@@ -3863,7 +3863,7 @@ spawn(function()
  game:GetService("RunService").Heartbeat:Connect(function()
   pcall(function()
    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-   if _G.Auto_Farm_Bone and StartMagnetBoneMon and (v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy") and (v.HumanoidRootPart.Position - PosMonBone.Position).magnitude <= 350 then
+   if _G.Auto_Farm_Bone and StartMagnetBoneMon and (v.Name == "Reborn Skeleton [Lv. 1975]" or v.Name == "Living Zombie [Lv. 2000]" or v.Name == "Demonic Soul [Lv. 2025]" or v.Name == "Posessed Mummy [Lv. 2050]") and (v.HumanoidRootPart.Position - PosMonBone.Position).magnitude <= 350 then
    v.HumanoidRootPart.CFrame = PosMonBone
    v.HumanoidRootPart.CanCollide = false
    v.HumanoidRootPart.Size = Vector3.new(50,50,50)
@@ -3881,9 +3881,9 @@ spawn(function()
  while wait() do
  if _G.Auto_Farm_Bone and World3 then
  pcall(function()
-  if game:GetService("Workspace").Enemies:FindFirstChild("Reborn Skeleton") or game:GetService("Workspace").Enemies:FindFirstChild("Living Zombie") or game:GetService("Workspace").Enemies:FindFirstChild("Domenic Soul") or game:GetService("Workspace").Enemies:FindFirstChild("Posessed Mummy") then
+  if game:GetService("Workspace").Enemies:FindFirstChild("Reborn Skeleton [Lv. 1975]") or game:GetService("Workspace").Enemies:FindFirstChild("Living Zombie [Lv. 2000]") or game:GetService("Workspace").Enemies:FindFirstChild("Domenic Soul [Lv. 2025]") or game:GetService("Workspace").Enemies:FindFirstChild("Posessed Mummy [Lv. 2050]") then
   for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-  if v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy" then
+  if v.Name == "Reborn Skeleton [Lv. 1975]" or v.Name == "Living Zombie [Lv. 2000]" or v.Name == "Demonic Soul [Lv. 2025]" or v.Name == "Posessed Mummy [Lv. 2050]" then
   if v.Humanoid.Health > 0 then
   repeat wait()
   AutoHaki()
@@ -3902,13 +3902,13 @@ spawn(function()
   else
    StartMagnetBoneMon = false
   for i,v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do
-  if v.Name == "Reborn Skeleton" then
+  if v.Name == "Reborn Skeleton [Lv. 1975]" then
   topos(v.HumanoidRootPart.CFrame * MethodFarm)
-  elseif v.Name == "Living Zombie" then
+  elseif v.Name == "Living Zombie [Lv. 2000]" then
   topos(v.HumanoidRootPart.CFrame * MethodFarm)
-  elseif v.Name == "Demonic Soul" then
+  elseif v.Name == "Demonic Soul [Lv. 2025]" then
   topos(v.HumanoidRootPart.CFrame * MethodFarm)
-  elseif v.Name == "Posessed Mummy" then
+  elseif v.Name == "Posessed Mummy [Lv. 2050]" then
   topos(v.HumanoidRootPart.CFrame * MethodFarm)
   end
   end
@@ -4238,7 +4238,7 @@ Setting:Line()
 
 Setting:Button("Follow me on Facebook! Click me and paste it on google!",function()
  
- setclipboard("https://www.facebook.com/zeleratoronFb/")
+ setclipboard("https://www.facebook.com/profile.php?id=100081831646251")
  end)
 
 Setting:Seperator(" Setting ")
@@ -4836,13 +4836,13 @@ end
 -- Farm_Monster
 if World1 then
 tableMon = {
- "Bandit","Monkey","Gorilla","Pirate","Brute","Desert Bandit","Desert Officer","Snow Bandit","Snowman","Chief Petty Officer","Sky Bandit","Dark Master","Prisoner", "Dangerous Prisoner","Toga Warrior","Gladiator","Military Soldier","Military Spy","Fishman Warrior","Fishman Commando","God's Guard","Shanda","Royal Squad","Royal Soldier","Galley Pirate","Galley Captain"
+ "Bandit [Lv. 5]","Monkey [Lv. 14]","Gorilla [Lv. 20]","Pirate [Lv. 35]","Brute [Lv. 45]","Desert Bandit [Lv. 60]","Desert Officer [Lv. 70]","Snow Bandit [Lv. 90]","Snowman [Lv. 100]","Chief Petty Officer [Lv. 120]","Sky Bandit [Lv. 150]","Dark Master [Lv. 175]","Prisoner [Lv. 190]", "Dangerous Prisoner [Lv. 210]","Toga Warrior [Lv. 250]","Gladiator [Lv. 275]","Military Soldier [Lv. 300]","Military Spy [Lv. 325]","Fishman Warrior [Lv. 375]","Fishman Commando [Lv. 400]","God's Guard [Lv. 450]","Shanda [Lv. 475]","Royal Squad [Lv. 525]","Royal Soldier [Lv. 550]","Galley Pirate [Lv. 625]","Galley Captain [Lv. 650]"
 } elseif World2 then
 tableMon = {
- "Raider","Mercenary","Swan Pirate","Factory Staff","Marine Lieutenant","Marine Captain","Zombie","Vampire","Snow Trooper","Winter Warrior ","Lab Subordinate","Horned Warrior","Magma Ninja","Lava Pirate","Ship Deckhand","Ship Engineer","Ship Steward","Ship Officer","Arctic Warrior","Snow Lurker","Sea Soldier","Water Fighter"
+ "Raider [Lv. 700]","Mercenary [Lv. 725]","Swan Pirate [Lv. 775]","Factory Staff [Lv. 800]","Marine Lieutenant [Lv. 875]","Marine Captain [Lv. 900]","Zombie [Lv. 950]","Vampire [Lv. 975]","Snow Trooper [Lv. 1000]","Winter Warrior [Lv. 1050]","Lab Subordinate [Lv. 1100]","Horned Warrior [Lv. 1125]","Magma Ninja [Lv. 1175]","Lava Pirate [Lv. 1200]","Ship Deckhand [Lv. 1250]","Ship Engineer [Lv. 1275]","Ship Steward [Lv. 1300]","Ship Officer [Lv. 1325]","Arctic Warrior [Lv. 1350]","Snow Lurker [Lv. 1375]","Sea Soldier [Lv. 1425]","Water Fighter [Lv. 1450]"
 } elseif World3 then
 tableMon = {
- "Pirate Millionaire","Dragon Crew Warrior","Dragon Crew Archer","Female Islander","Giant Islander","Marine Commodore ","Marine Rear Admiral","Fishman Raider","Fishman Captain","Forest Pirate","Mythological Pirate","Jungle Pirate","Musketeer Pirate","Reborn Skeleton","Living Zombie","Demonic Soul","Posessed Mummy", "Peanut Scout", "Peanut President", "Ice Cream Che", "Ice Cream Commander", "Cookie Crafter", "Cake Guard", "Baking Staff", "Head Baker", "Cocoa Warrior", "Chocolate Bar Battler", "Sweet Thief", "Candy Rebel", "Candy Pirate", "Snow Demon"
+ "Pirate Millionaire [Lv. 1500]","Dragon Crew Warrior [Lv. 1575]","Dragon Crew Archer [Lv. 1600]","Female Islander [Lv. 1625]","Giant Islander [Lv. 1650]","Marine Commodore [Lv. 1700]","Marine Rear Admiral [Lv. 1725]","Fishman Raider [Lv. 1775]","Fishman Captain [Lv. 1800]","Forest Pirate [Lv. 1825]","Mythological Pirate [Lv. 1850]","Jungle Pirate [Lv. 1900]","Musketeer Pirate [Lv. 1925]","Reborn Skeleton [Lv. 1975]","Living Zombie [Lv. 2000]","Demonic Soul [Lv. 2025]","Posessed Mummy [Lv. 2050]", "Peanut Scout [Lv. 2075]", "Peanut President [Lv. 2100]", "Ice Cream Chef [Lv. 2125]", "Ice Cream Commander [Lv. 2150]", "Cookie Crafter [Lv. 2200]", "Cake Guard [Lv. 2225]", "Baking Staff [Lv. 2250]", "Head Baker [Lv. 2275]", "Cocoa Warrior [Lv. 2300]", "Chocolate Bar Battler [Lv. 2325]", "Sweet Thief [Lv. 2350]", "Candy Rebel [Lv. 2375]", "Candy Pirate [Lv. 2400]", "Snow Demon [Lv. 2425]"
 }
 end
 
@@ -5245,7 +5245,7 @@ local Boss = {}
     
     for i, v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do
         if string.find(v.Name, "Boss") then
-            if v.Name == "Ice Admiral" then
+            if v.Name == "Ice Admiral [Lv. 700] [Boss]" then
                 else
                 table.insert(Boss, v.Name)
             end
@@ -5278,7 +5278,7 @@ spawn(function()
 		if _G.Auto_Farm_Boss then
 			pcall(function()
 				CheckBossQuest()
-				if MsBoss == "Soul Reaper" or MsBoss == "Longma" or MsBoss == "Don Swan" or MsBoss == "Cursed Captain" or MsBoss == "Order" or MsBoss == "rip_indra True Form " then
+				if MsBoss == "Soul Reaper [Lv. 2100] [Raid Boss]" or MsBoss == "Longma [Lv. 2000] [Boss]" or MsBoss == "Don Swan [Lv. 1000] [Boss]" or MsBoss == "Cursed Captain [Lv. 1325] [Raid Boss]" or MsBoss == "Order [Lv. 1250] [Raid Boss]" or MsBoss == "rip_indra True Form [Lv. 5000] [Raid Boss]" then
 					if game:GetService("Workspace").Enemies:FindFirstChild(MsBoss) then
 						for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
 							if v.Name == MsBoss then
@@ -5392,81 +5392,81 @@ end)
 
 function MaterialMon()
 			if _G.SelectMaterial == "Radioactive Material" then
-				MMon = "Factory Staff"
+				MMon = "Factory Staff [Lv. 800]"
 				MPos = CFrame.new(-507.7895202636719, 72.99479675292969, -126.45632934570312)
 				SP = "Bar"
 			elseif _G.SelectMaterial == "Mystic Droplet" then
-				MMon = "Water Fighter"
+				MMon = "Water Fighter [Lv. 1450]"
 				MPos = CFrame.new(-3214.218017578125, 298.69952392578125, -10543.685546875)
 				SP = "ForgottenIsland"
 			elseif _G.SelectMaterial == "Magma Ore" then
 				if game.PlaceId == 2753915549 then
-					MMon = "Military Spy"
+					MMon = "Military Spy [Lv. 325]"
 					MPos = CFrame.new(-5850.2802734375, 77.28675079345703, 8848.6748046875)
 					SP = "Magma"
 				elseif game.PlaceId == 4442272183 then
-					MMon = "Lava Pirate"
+					MMon = "Lava Pirate [Lv. 1200]"
 					MPos = CFrame.new(-5234.60595703125, 51.953372955322266, -4732.27880859375)
 					SP = "CircleIslandFire"
 				end
 			elseif _G.SelectMaterial == "Angel Wings" then
-				MMon = "Royal Soldier"
+				MMon = "Royal Soldier [Lv. 550]"
 				MPos = CFrame.new(-7827.15625, 5606.912109375, -1705.5833740234375)
 				SP = "Sky2"
 			elseif _G.SelectMaterial == "Leather" then
 				if game.PlaceId == 2753915549 then
-					MMon = "Pirate"
+					MMon = "Pirate [Lv. 36]"
 					MPos = CFrame.new(-1211.8792724609375, 4.787090301513672, 3916.83056640625)
 					SP = "Pirate"
 				elseif game.PlaceId == 4442272183 then
-					MMon = "Marine Captain"
+					MMon = "Marine Captain [Lv. 900]"
 					MPos = CFrame.new(-2010.5059814453125, 73.00115966796875, -3326.620849609375)
 					SP = "Greenb"
 				elseif game.PlaceId == 7449423635 then
-					MMon = "Jungle Pirate"
+					MMon = "Jungle Pirate [Lv. 1900]"
 					MPos = CFrame.new(-11975.78515625, 331.7734069824219, -10620.0302734375)
 					SP = "PineappleTown"
 				end
 			elseif _G.SelectMaterial == "Scrap Metal" then
 				if game.PlaceId == 2753915549 then
-					MMon = "Brute"
+					MMon = "Brute [Lv. 45]"
 					MPos = CFrame.new(-1132.4202880859375, 14.844913482666016, 4293.30517578125)
 					SP = "Pirate"
 				elseif game.PlaceId == 4442272183 then
-					MMon = "Mercenary"
+					MMon = "Mercenary [Lv. 725]"
 					MPos = CFrame.new(-972.307373046875, 73.04473876953125, 1419.2901611328125)
 					SP = "DressTown"
 				elseif game.PlaceId == 7449423635 then
-					MMon = "Pirate Millionaire "
+					MMon = "Pirate Millionaire [Lv. 1500]"
 					MPos = CFrame.new(-289.6311950683594, 43.8282470703125, 5583.66357421875)
 					SP = "Default"
 				end
 			elseif _G.SelectMaterial == "Demonic Wisp" then
-				MMon = "Demonic Soul"
+				MMon = "Demonic Soul [Lv. 2025]"
 				MPos = CFrame.new(-9503.388671875, 172.139892578125, 6143.0634765625)
 				SP = "HauntedCastle"
 			elseif _G.SelectMaterial == "Vampire Fang" then
-				MMon = "Vampire"
+				MMon = "Vampire [Lv. 975]"
 				MPos = CFrame.new(-5999.20458984375, 6.437741279602051, -1290.059326171875)
 				SP = "Graveyard"
 			elseif _G.SelectMaterial == "Conjured Cocoa" then
-				MMon = "Chocolate Bar Battler"
+				MMon = "Chocolate Bar Battler [Lv. 2325]"
 				MPos = CFrame.new(744.7930908203125, 24.76934242248535, -12637.7255859375)
 				SP = "Chocolate"
 			elseif _G.SelectMaterial == "Dragon Scale" then
-				MMon = "Dragon Crew Warrior"
+				MMon = "Dragon Crew Warrior [Lv. 1575]"
 				MPos = CFrame.new(5824.06982421875, 51.38640213012695, -1106.694580078125)
 				SP = "Hydra1"
 			elseif _G.SelectMaterial == "Gunpowder" then
-				MMon = "Pistol Billionaire"
+				MMon = "Pistol Billionaire [Lv. 1525]"
 				MPos = CFrame.new(-379.6134338378906, 73.84449768066406, 5928.5263671875)
 				SP = "Default"
 			elseif _G.SelectMaterial == "Fish Tail" then
-				MMon = "Fishman Captain"
+				MMon = "Fishman Captain [Lv. 1800]"
 				MPos = CFrame.new(-10961.0126953125, 331.7977600097656, -8914.29296875)
 				SP = "PineappleTown"
 			elseif _G.SelectMaterial == "Mini Tusk" then
-				MMon = "Mythological Pirate"
+				MMon = "Mythological Pirate [Lv. 1850]"
 				MPos = CFrame.new(-13516.0458984375, 469.8182373046875, -6899.16064453125)
 				SP = "BigMansion"
 			end
@@ -5809,14 +5809,14 @@ Notification:Notify(
 )
                     else
                         if World2 then
-                            if game:GetService("Workspace").Enemies:FindFirstChild("Water Fighter") then
+                            if game:GetService("Workspace").Enemies:FindFirstChild("Water Fighter [Lv. 1450]") then
                                 if game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") then
                                     repeat task.wait()
-                                        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Enemies:FindFirstChild("Water Fighter").HumanoidRootPart.CFrame * CFrame.new(3,0,0)
+                                        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Enemies:FindFirstChild("Water Fighter [Lv. 1450]").HumanoidRootPart.CFrame * CFrame.new(3,0,0)
                                     until _G.AutoObservation == false or not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel")
                                 else
                                     repeat task.wait()
-                                        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Enemies:FindFirstChild("Water Fighter").HumanoidRootPart.CFrame * CFrame.new(0,50,0)+
+                                        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Enemies:FindFirstChild("Water Fighter [Lv. 1450]").HumanoidRootPart.CFrame * CFrame.new(0,50,0)+
                                             wait(1)
                                         if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") and _G.AutoObservation_Hop == true then
                                            game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
@@ -5827,14 +5827,14 @@ Notification:Notify(
                                 topos(CFrame.new(-3184.662353515625, 58.35300064086914, -9662.85546875))
                             end
                         elseif World1 then
-                            if game:GetService("Workspace").Enemies:FindFirstChild("Galley Captain") then
+                            if game:GetService("Workspace").Enemies:FindFirstChild("Galley Captain [Lv. 650]") then
                                 if game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") then
                                     repeat task.wait()
-                                        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Enemies:FindFirstChild("Galley Captain").HumanoidRootPart.CFrame * CFrame.new(3,0,0)
+                                        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Enemies:FindFirstChild("Galley Captain [Lv. 650]").HumanoidRootPart.CFrame * CFrame.new(3,0,0)
                                     until _G.AutoObservation == false or not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel")
                                 else
                                     repeat task.wait()
-                                        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Enemies:FindFirstChild("Galley Captain").HumanoidRootPart.CFrame * CFrame.new(0,50,0)
+                                        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Enemies:FindFirstChild("Galley Captain [Lv. 650]").HumanoidRootPart.CFrame * CFrame.new(0,50,0)
                                         wait(1)
                                         if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") and _G.AutoObservation_Hop == true then
                                             game:GetService("TeleportService"):Teleport(game.PlaceId,game:GetService("Players").LocalPlayer)
@@ -5848,11 +5848,11 @@ Notification:Notify(
                             if game:GetService("Workspace").Enemies:FindFirstChild("Giant Islander [Lv. 1650]") then
                                 if game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") then
                                     repeat task.wait()
-                                        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Enemies:FindFirstChild("Giant Islander").HumanoidRootPart.CFrame * CFrame.new(3,0,0)
+                                        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Enemies:FindFirstChild("Giant Islander [Lv. 1650]").HumanoidRootPart.CFrame * CFrame.new(3,0,0)
                                     until _G.AutoObservation == false or not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel")
                                 else
                                     repeat task.wait()
-                                        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Enemies:FindFirstChild("Giant Islander").HumanoidRootPart.CFrame * CFrame.new(0,50,0)
+                                        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Enemies:FindFirstChild("Giant Islander [Lv. 1650]").HumanoidRootPart.CFrame * CFrame.new(0,50,0)
                                         wait(1)
                                         if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") and _G.AutoObservation_Hop == true then
                                             game:GetService("TeleportService"):Teleport(game.PlaceId,game:GetService("Players").LocalPlayer)
@@ -6056,7 +6056,7 @@ local Elite_Hunter_Status = Weapon:Label("Status")
 	spawn(function()
 		while wait() do
 			pcall(function()
-				if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
+				if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo [Lv. 1750]") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre [Lv. 1750]") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban [Lv. 1750]") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo [Lv. 1750]") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre [Lv. 1750]") or game:GetService("Workspace").Enemies:FindFirstChild("Urban [Lv. 1750]") then
 					Elite_Hunter_Status:Set("Status : Elite Spawn!")	
 				else
 					Elite_Hunter_Status:Set("Status : Elite Not Spawn")	
@@ -6087,9 +6087,9 @@ end)
 				pcall(function()
 					if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
 						if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Diablo") or string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Deandre") or string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Urban") then
-							if game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Diablo [Lv. 1750]") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre [Lv. 1750]") or game:GetService("Workspace").Enemies:FindFirstChild("Urban [Lv. 1750]") then
 								for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-									if v.Name == "Diablo" or v.Name == "Deandre" or v.Name == "Urban" then
+									if v.Name == "Diablo [Lv. 1750]" or v.Name == "Deandre [Lv. 1750]" or v.Name == "Urban [Lv. 1750]" then
 										if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
 											repeat wait()
 												AutoHaki()
@@ -6106,12 +6106,12 @@ end)
 									end
 								end
 							else
-								if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") then
-									topos(game:GetService("ReplicatedStorage"):FindFirstChild("Diablo").HumanoidRootPart.CFrame * MethodFarm)
-								elseif game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") then
-									topos(game:GetService("ReplicatedStorage"):FindFirstChild("Deandre").HumanoidRootPart.CFrame * MethodFarm)
-								elseif game:GetService("ReplicatedStorage"):FindFirstChild("Urban") then
-									topos(game:GetService("ReplicatedStorage"):FindFirstChild("Urban").HumanoidRootPart.CFrame * MethodFarm)
+								if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo [Lv. 1750]") then
+									topos(game:GetService("ReplicatedStorage"):FindFirstChild("Diablo [Lv. 1750]").HumanoidRootPart.CFrame * MethodFarm)
+								elseif game:GetService("ReplicatedStorage"):FindFirstChild("Deandre [Lv. 1750]") then
+									topos(game:GetService("ReplicatedStorage"):FindFirstChild("Deandre [Lv. 1750]").HumanoidRootPart.CFrame * MethodFarm)
+								elseif game:GetService("ReplicatedStorage"):FindFirstChild("Urban [Lv. 1750]") then
+									topos(game:GetService("ReplicatedStorage"):FindFirstChild("Urban [Lv. 1750]").HumanoidRootPart.CFrame * MethodFarm)
 								end
 							end                    
 						end
@@ -6163,7 +6163,7 @@ end)
 		game:GetService("RunService").Heartbeat:Connect(function()
 			pcall(function()
 				for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-					if _G.Auto_Open_Dough_Dungeon and StartCakeStartMagnet and (v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker") and (v.HumanoidRootPart.Position - POSCAKE.Position).magnitude <= 350 then
+					if _G.Auto_Open_Dough_Dungeon and StartCakeStartMagnet and (v.Name == "Cookie Crafter [Lv. 2200]" or v.Name == "Cake Guard [Lv. 2225]" or v.Name == "Baking Staff [Lv. 2250]" or v.Name == "Head Baker [Lv. 2275]") and (v.HumanoidRootPart.Position - POSCAKE.Position).magnitude <= 350 then
 						v.HumanoidRootPart.CFrame = POSCAKE
 						v.HumanoidRootPart.CanCollide = false
 						v.HumanoidRootPart.Size = Vector3.new(50,50,50)
@@ -6181,7 +6181,7 @@ end)
 		game:GetService("RunService").Heartbeat:Connect(function()
 			pcall(function()
 				for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-					if _G.Auto_Cake_Prince and StartCakeStartMagnet and (v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker") and (v.HumanoidRootPart.Position - POSCAKE.Position).magnitude <= 350 then
+					if _G.Auto_Cake_Prince and StartCakeStartMagnet and (v.Name == "Cookie Crafter [Lv. 2200]" or v.Name == "Cake Guard [Lv. 2225]" or v.Name == "Baking Staff [Lv. 2250]" or v.Name == "Head Baker [Lv. 2275]") and (v.HumanoidRootPart.Position - POSCAKE.Position).magnitude <= 350 then
 						v.HumanoidRootPart.CFrame = POSCAKE
 						v.HumanoidRootPart.CanCollide = false
 						v.HumanoidRootPart.Size = Vector3.new(50,50,50)
@@ -6199,10 +6199,10 @@ end)
 		while wait() do
 			if _G.Auto_Cake_Prince then
 				pcall(function()
-					if game.ReplicatedStorage:FindFirstChild("Cake Prince") or game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") then   
-						if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") then
+					if game.ReplicatedStorage:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") or game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") then   
+						if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") then
 							for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do 
-								if v.Name == "Cake Prince" then
+								if v.Name == "Cake Prince [Lv. 2300] [Raid Boss]" then
 									repeat wait()
 										AutoHaki()
 										EquipWeapon(_G.Select_Weapon)
@@ -6218,9 +6218,9 @@ end)
 							topos(CFrame.new(-2009.2802734375, 4532.97216796875, -14937.3076171875)) 
 						end
 					else
-						if game.Workspace.Enemies:FindFirstChild("Baking Staff") or game.Workspace.Enemies:FindFirstChild("Head Baker") or game.Workspace.Enemies:FindFirstChild("Cake Guard") or game.Workspace.Enemies:FindFirstChild("Cookie Crafter")  then
+						if game.Workspace.Enemies:FindFirstChild("Baking Staff [Lv. 2250]") or game.Workspace.Enemies:FindFirstChild("Head Baker [Lv. 2275]") or game.Workspace.Enemies:FindFirstChild("Cake Guard [Lv. 2225]") or game.Workspace.Enemies:FindFirstChild("Cookie Crafter [Lv. 2200]")  then
 							for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do  
-								if (v.Name == "Baking Staff" or v.Name == "Head Baker" or v.Name == "Cake Guard" or v.Name == "Cookie Crafter") and v.Humanoid.Health > 0 then
+								if (v.Name == "Baking Staff [Lv. 2250]" or v.Name == "Head Baker [Lv. 2275]" or v.Name == "Cake Guard [Lv. 2225]" or v.Name == "Cookie Crafter [Lv. 2200]") and v.Humanoid.Health > 0 then
 									repeat wait()
 										AutoHaki()
 										EquipWeapon(_G.Select_Weapon)
@@ -6325,10 +6325,10 @@ spawn(function()
 
 											game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 										end
-										if game.Workspace.Enemies:FindFirstChild("Living Zombie") then
+										if game.Workspace.Enemies:FindFirstChild("Living Zombie [Lv. 2000]") then
 											for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
 												if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-													if v.Name == "Living Zombie" then
+													if v.Name == "Living Zombie [Lv. 2000]" then
 														EquipWeapon(_G.Select_Weapon)
 														v.HumanoidRootPart.Size = Vector3.new(60,60,60)
 														v.HumanoidRootPart.Transparency = 1
@@ -6439,16 +6439,16 @@ spawn(function()
 						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CDKQuest","Progress","Good")
 						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CDKQuest","StartTrial","Good")
 					elseif GetMaterial("Alucard Fragment") == 6 then
-						if game:GetService("Workspace").Enemies:FindFirstChild("Cursed Skeleton Boss") or game:GetService("Workspace").ReplicatedStorage:FindFirstChild("Cursed Skeleton Boss") then
+						if game:GetService("Workspace").Enemies:FindFirstChild("Cursed Skeleton Boss [Lv. 2025] [Boss]") or game:GetService("Workspace").ReplicatedStorage:FindFirstChild("Cursed Skeleton Boss [Lv. 2025] [Boss]") then
 							Auto_Quest_Yama_1 = false
 							Auto_Quest_Yama_2 = false
 							Auto_Quest_Yama_3 = false
 							Auto_Quest_Tushita_1 = false
 							Auto_Quest_Tushita_2 = false
 							Auto_Quest_Tushita_3 = false
-							if game:GetService("Workspace").Enemies:FindFirstChild("Cursed Skeleton Boss") or game:GetService("Workspace").Enemies:FindFirstChild("Cursed Skeleton") then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Cursed Skeleton Boss [Lv. 2025] [Boss]") or game:GetService("Workspace").Enemies:FindFirstChild("Cursed Skeleton [Lv. 2200]") then
 								for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-									if v.Name == "Cursed Skeleton Boss" or v.Name == "Cursed Skeleton" then
+									if v.Name == "Cursed Skeleton Boss [Lv. 2025] [Boss]" or v.Name == "Cursed Skeleton [Lv. 2200]" then
 										if v.Humanoid.Health > 0 then
 											v.HumanoidRootPart.CanCollide = false
 											v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
@@ -6484,9 +6484,9 @@ spawn(function()
 		while wait() do
 			if Auto_Quest_Yama_1 then
 				pcall(function()
-					if game:GetService("Workspace").Enemies:FindFirstChild("Mythological Pirate") then
+					if game:GetService("Workspace").Enemies:FindFirstChild("Mythological Pirate [Lv. 1850]") then
 						for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-							if v.Name == "Mythological Pirate" then
+							if v.Name == "Mythological Pirate [Lv. 1850]" then
 								repeat wait()
 									topos(v.HumanoidRootPart.CFrame * CFrame.new(0,0,-2))
 								until _G.AutoCdk == false or Auto_Cursed_Dual_Katana == false or Auto_Quest_Yama_1 == false
@@ -6606,9 +6606,9 @@ spawn(function()
 						topos(game:GetService("Workspace").Map["Haunted Castle"].Summoner.Detection.CFrame)
 					elseif game:GetService("Workspace").Map:FindFirstChild("HellDimension") then
 						repeat wait()
-							if game:GetService("Workspace").Enemies:FindFirstChild("Cursed Skeleton") or game:GetService("Workspace").Enemies:FindFirstChild("Cursed Skeleton [Lv. 2200] [Boss]") or game:GetService("Workspace").Enemies:FindFirstChild("Hell's Messenger [Lv. 2200] [Boss]") then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Cursed Skeleton [Lv. 2200]") or game:GetService("Workspace").Enemies:FindFirstChild("Cursed Skeleton [Lv. 2200] [Boss]") or game:GetService("Workspace").Enemies:FindFirstChild("Hell's Messenger [Lv. 2200] [Boss]") then
 								for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-									if v.Name == "Cursed Skeleton" or v.Name == "Cursed Skeleton" or v.Name == "Hell's Messenger" then
+									if v.Name == "Cursed Skeleton [Lv. 2200]" or v.Name == "Cursed Skeleton [Lv. 2200] [Boss]" or v.Name == "Hell's Messenger [Lv. 2200] [Boss]" then
 										if v.Humanoid.Health > 0 then
 											repeat wait()
 												StartMagnet = true
@@ -6660,10 +6660,10 @@ spawn(function()
 							end
 						until Auto_Cursed_Dual_Katana == false or Auto_Quest_Yama_3 == false or GetMaterial("Alucard Fragment") == 3
 					else
-						if game:GetService("Workspace").Enemies:FindFirstChild("Soul Reaper") or game.ReplicatedStorage:FindFirstChild("Soul Reaper") then
-							if game:GetService("Workspace").Enemies:FindFirstChild("Soul Reaper") then
+						if game:GetService("Workspace").Enemies:FindFirstChild("Soul Reaper [Lv. 2100] [Raid Boss]") or game.ReplicatedStorage:FindFirstChild("Soul Reaper [Lv. 2100] [Raid Boss]") then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Soul Reaper [Lv. 2100] [Raid Boss]") then
 								for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-									if v.Name == "Soul Reaper" then
+									if v.Name == "Soul Reaper [Lv. 2100] [Raid Boss]" then
 										if v.Humanoid.Health > 0 then
 											repeat wait()
 												topos(v.HumanoidRootPart.CFrame * CFrame.new(0,0,-2))
@@ -6734,10 +6734,10 @@ spawn(function()
 		while wait() do
 			if Auto_Quest_Tushita_3 then
 				pcall(function()
-					if game:GetService("Workspace").Enemies:FindFirstChild("Cake Queen") or game.ReplicatedStorage:FindFirstChild("Cake Queen") then
-						if game:GetService("Workspace").Enemies:FindFirstChild("Cake Queen") then
+					if game:GetService("Workspace").Enemies:FindFirstChild("Cake Queen [Lv. 2175] [Boss]") or game.ReplicatedStorage:FindFirstChild("Cake Queen [Lv. 2175] [Boss]") then
+						if game:GetService("Workspace").Enemies:FindFirstChild("Cake Queen [Lv. 2175] [Boss]") then
 							for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-								if v.Name == "Cake Queen" then
+								if v.Name == "Cake Queen [Lv. 2175] [Boss]" then
 									if v.Humanoid.Health > 0 then
 										repeat wait()
 											if Auto_Buso then
@@ -6773,9 +6773,9 @@ spawn(function()
 						end
 					elseif game:GetService("Workspace").Map:FindFirstChild("HeavenlyDimension") then
 						repeat wait()
-							if game:GetService("Workspace").Enemies:FindFirstChild("Cursed Skeleton") or game:GetService("Workspace").Enemies:FindFirstChild("Cursed Skeleton [Boss]") or game:GetService("Workspace").Enemies:FindFirstChild("Heaven's Guardian [Boss]") then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Cursed Skeleton [Lv. 2200]") or game:GetService("Workspace").Enemies:FindFirstChild("Cursed Skeleton [Lv. 2200] [Boss]") or game:GetService("Workspace").Enemies:FindFirstChild("Heaven's Guardian [Lv. 2200] [Boss]") then
 								for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-									if v.Name == "Cursed Skeleton" or v.Name == "Cursed Skeleton" or v.Name == "Heaven's Guardian" then
+									if v.Name == "Cursed Skeleton [Lv. 2200]" or v.Name == "Cursed Skeleton [Lv. 2200] [Boss]" or v.Name == "Heaven's Guardian [Lv. 2200] [Boss]" then
 										if v.Humanoid.Health > 0 then
 											repeat wait()
 												if Auto_Buso then
@@ -6849,10 +6849,10 @@ Weapon:Toggle("Auto Saber",_G.AutoSaber,function(value)
                     if game.Players.localPlayer.Data.Level.Value < 200 then
                     else
                         if game.Workspace.Map.Jungle.Final.Part.CanCollide == false then
-                            if _G.AutoSaber and game.ReplicatedStorage:FindFirstChild("Saber Expert") or game.Workspace.Enemies:FindFirstChild("Saber Expert") then
-                                if game.Workspace.Enemies:FindFirstChild("Saber Expert") then
+                            if _G.AutoSaber and game.ReplicatedStorage:FindFirstChild("Saber Expert [Lv. 200] [Boss]") or game.Workspace.Enemies:FindFirstChild("Saber Expert [Lv. 200] [Boss]") then
+                                if game.Workspace.Enemies:FindFirstChild("Saber Expert [Lv. 200] [Boss]") then
                                     for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-                                        if v.Name == "Saber Expert" and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                        if v.Name == "Saber Expert [Lv. 200] [Boss]" and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                                             repeat wait()
                                                 if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude > 300 then
                                                     Farmtween = topos(v.HumanoidRootPart.Position,v.HumanoidRootPart.CFrame)
@@ -6898,9 +6898,9 @@ Weapon:Toggle("Auto Saber",_G.AutoSaber,function(value)
                                 if game.Workspace.Map.Desert.Burn.Part.CanCollide == false then
                                     if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","SickMan") == 0 then
                                         if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon") == 0 then
-                                            if game.Workspace.Enemies:FindFirstChild("Mob Leader [Boss]") then
+                                            if game.Workspace.Enemies:FindFirstChild("Mob Leader [Lv. 120] [Boss]") then
                                                 for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-                                                    if _G.AutoSaber and v:IsA("Model") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Name == "Mob Leader" then
+                                                    if _G.AutoSaber and v:IsA("Model") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Name == "Mob Leader [Lv. 120] [Boss]" then
                                                         repeat
                                                             pcall(function() wait() 
                                                                 if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude > 300 then
@@ -7064,9 +7064,9 @@ Weapon:Toggle("Auto Saber",_G.AutoSaber,function(value)
         while wait() do
             if _G.AutoPole then
                 pcall(function()
-                    if game:GetService("Workspace").Enemies:FindFirstChild("Thunder God") then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Thunder God [Lv. 575] [Boss]") then
                         for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if v.Name == "Thunder God" then
+                            if v.Name == "Thunder God [Lv. 575] [Boss]" then
                                 if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
                                     repeat task.wait()
                                         AutoHaki()
@@ -7083,8 +7083,8 @@ Weapon:Toggle("Auto Saber",_G.AutoSaber,function(value)
                             end
                         end
                     else
-                        if game:GetService("ReplicatedStorage"):FindFirstChild("Thunder God") then
-                            topos(game:GetService("ReplicatedStorage"):FindFirstChild("Thunder God").HumanoidRootPart.CFrame * CFrame.new(5,10,7))
+                        if game:GetService("ReplicatedStorage"):FindFirstChild("Thunder God [Lv. 575] [Boss]") then
+                            topos(game:GetService("ReplicatedStorage"):FindFirstChild("Thunder God [Lv. 575] [Boss]").HumanoidRootPart.CFrame * CFrame.new(5,10,7))
                         else
                             if _G.AutoPoleHop then
                                 Hop()
@@ -7117,7 +7117,7 @@ end)
 		game:GetService("RunService").Heartbeat:Connect(function()
 			pcall(function()
 				for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-					if _G.Auto_Evo_Race_V2 and StartEvoStartMagnet and v.Name == "Swan Pirate" and (v.HumanoidRootPart.Position - PosMonEvo.Position).magnitude <= 350 then
+					if _G.Auto_Evo_Race_V2 and StartEvoStartMagnet and v.Name == "Swan Pirate [Lv. 775]" and (v.HumanoidRootPart.Position - PosMonEvo.Position).magnitude <= 350 then
 						v.HumanoidRootPart.CFrame = PosMonEvo
 						v.HumanoidRootPart.CanCollide = false
 						v.HumanoidRootPart.Size = Vector3.new(50,50,50)
@@ -7149,9 +7149,9 @@ end)
 								elseif not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Flower 2") and not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Flower 2") then
 									topos(game:GetService("Workspace").Flower2.CFrame)
 								elseif not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Flower 3") and not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Flower 3") then
-									if game:GetService("Workspace").Enemies:FindFirstChild("Swan Pirate") then
+									if game:GetService("Workspace").Enemies:FindFirstChild("Swan Pirate [Lv. 775]") then
 										for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-											if v.Name == "Swan Pirate" then
+											if v.Name == "Swan Pirate [Lv. 775]" then
 												repeat wait()
 													AutoHaki()
 													EquipWeapon(_G.Select_Weapon)
@@ -7325,7 +7325,7 @@ end)
 		game:GetService("RunService").Heartbeat:Connect(function()
 			pcall(function()
 				for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-					if _G.Auto_Rengoku and StartRengokuStartMagnet and (v.Name == "Snow Lurker" or v.Name == "Arctic Warrior") and (v.HumanoidRootPart.Position - RengokuMon.Position).magnitude <= 350 then
+					if _G.Auto_Rengoku and StartRengokuStartMagnet and (v.Name == "Snow Lurker [Lv. 1375]" or v.Name == "Arctic Warrior [Lv. 1350]") and (v.HumanoidRootPart.Position - RengokuMon.Position).magnitude <= 350 then
 						v.HumanoidRootPart.CFrame = RengokuMon
 						v.HumanoidRootPart.CanCollide = false
 						v.HumanoidRootPart.Size = Vector3.new(50,50,50)
@@ -7346,9 +7346,9 @@ end)
 					if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hidden Key") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Hidden Key") then
 						EquipWeapon("Hidden Key")
 						topos(CFrame.new(6571.1201171875, 299.23028564453, -6967.841796875))
-					elseif game:GetService("Workspace").Enemies:FindFirstChild("Snow Lurker") or game:GetService("Workspace").Enemies:FindFirstChild("Arctic Warrior") then
+					elseif game:GetService("Workspace").Enemies:FindFirstChild("Snow Lurker [Lv. 1375]") or game:GetService("Workspace").Enemies:FindFirstChild("Arctic Warrior [Lv. 1350]") then
 						for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-							if (v.Name == "Snow Lurker" or v.Name == "Arctic Warrior") and v.Humanoid.Health > 0 then
+							if (v.Name == "Snow Lurker [Lv. 1375]" or v.Name == "Arctic Warrior [Lv. 1350]") and v.Humanoid.Health > 0 then
 								repeat wait()
 									AutoHaki()
 									EquipWeapon(_G.Select_Weapon)
@@ -7387,10 +7387,10 @@ end)
 	spawn(function()
 		while wait() do
 			pcall(function()
-				if _G.Auto_Swan_Glasses and game.ReplicatedStorage:FindFirstChild("Don Swan") or game.Workspace.Enemies:FindFirstChild("Don Swan") then
-					if game.Workspace.Enemies:FindFirstChild("Don Swan") then
+				if _G.Auto_Swan_Glasses and game.ReplicatedStorage:FindFirstChild("Don Swan [Lv. 1000] [Boss]") or game.Workspace.Enemies:FindFirstChild("Don Swan [Lv. 1000] [Boss]") then
+					if game.Workspace.Enemies:FindFirstChild("Don Swan [Lv. 1000] [Boss]") then
 						for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-							if _G.Auto_Swan_Glasses and v.Name == "Don Swan" and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+							if _G.Auto_Swan_Glasses and v.Name == "Don Swan [Lv. 1000] [Boss]" and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
 								repeat wait()  
 									EquipWeapon(_G.Select_Weapon)
 									AutoHaki()
@@ -7430,10 +7430,10 @@ end)
 		while wait() do
 			if _G.Auto_Dragon_Trident then
 				pcall(function()
-					if _G.Auto_Dragon_Trident and game.ReplicatedStorage:FindFirstChild("Tide Keeper") or game.Workspace.Enemies:FindFirstChild("Tide Keeper") then
-						if game.Workspace.Enemies:FindFirstChild("Tide Keeper ") then
+					if _G.Auto_Dragon_Trident and game.ReplicatedStorage:FindFirstChild("Tide Keeper [Lv. 1475] [Boss]") or game.Workspace.Enemies:FindFirstChild("Tide Keeper [Lv. 1475] [Boss]") then
+						if game.Workspace.Enemies:FindFirstChild("Tide Keeper [Lv. 1475] [Boss]") then
 							for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-								if v.Name == "Tide Keeper " and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+								if v.Name == "Tide Keeper [Lv. 1475] [Boss]" and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
 									repeat wait()
 										EquipWeapon(_G.Select_Weapon)
 										AutoHaki()
@@ -7480,11 +7480,11 @@ end)
 				pcall(function()
 					if game.Players.LocalPlayer.Backpack:FindFirstChild("Hallow Essence") then                    
 						topos(CFrame.new(-8932.83789, 144.098709, 6059.34229, -0.999290943, 7.95623478e-09, -0.0376505218, 4.4684243e-09, 1, 9.27205832e-08, 0.0376505218, 9.24866086e-08, -0.999290943))  
-					elseif game:GetService("Workspace").Enemies:FindFirstChild("Soul Reaper") or game.ReplicatedStorage:FindFirstChild("Soul Reaper") then
-						if game.Workspace.Enemies:FindFirstChild ("Soul Reaper") then    
+					elseif game:GetService("Workspace").Enemies:FindFirstChild("Soul Reaper [Lv. 2100] [Raid Boss]") or game.ReplicatedStorage:FindFirstChild("Soul Reaper [Lv. 2100] [Raid Boss]") then
+						if game.Workspace.Enemies:FindFirstChild ("Soul Reaper [Lv. 2100] [Raid Boss]") then    
 							for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-								if v.Name == "Soul Reaper"  then
-									if _G.Auto_Soul_Reaper and v.Name == "Soul Reaper" and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+								if v.Name == "Soul Reaper [Lv. 2100] [Raid Boss]"  then
+									if _G.Auto_Soul_Reaper and v.Name == "Soul Reaper [Lv. 2100] [Raid Boss]" and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
 										repeat wait()
 											AutoHaki()
 											EquipWeapon(_G.Select_Weapon)
@@ -7535,9 +7535,9 @@ end)
 						if string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),"Do you want to open the portal now?") then
 							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")
 						else
-							if game.Workspace.Enemies:FindFirstChild("Baking Staff") or game.Workspace.Enemies:FindFirstChild("Head Baker") or game.Workspace.Enemies:FindFirstChild("Cake Guard") or game.Workspace.Enemies:FindFirstChild("Cookie Crafter")  then
+							if game.Workspace.Enemies:FindFirstChild("Baking Staff [Lv. 2250]") or game.Workspace.Enemies:FindFirstChild("Head Baker [Lv. 2275]") or game.Workspace.Enemies:FindFirstChild("Cake Guard [Lv. 2225]") or game.Workspace.Enemies:FindFirstChild("Cookie Crafter [Lv. 2200]")  then
 								for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do  
-									if (v.Name == "Baking Staff" or v.Name == "Head Baker" or v.Name == "Cake Guard" or v.Name == "Cookie Crafter") and v.Humanoid.Health > 0 then
+									if (v.Name == "Baking Staff [Lv. 2250]" or v.Name == "Head Baker [Lv. 2275]" or v.Name == "Cake Guard [Lv. 2225]" or v.Name == "Cookie Crafter [Lv. 2200]") and v.Humanoid.Health > 0 then
 										repeat wait()
 											AutoHaki()
 											EquipWeapon(_G.Select_Weapon)
@@ -7547,7 +7547,7 @@ end)
 											topos(v.HumanoidRootPart.CFrame * MethodFarm)
 											game:GetService'VirtualUser':CaptureController()
 											game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-										until _G.Auto_Open_Dough_Dungeon == false or game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince") or not v.Parent or v.Humanoid.Health <= 0
+										until _G.Auto_Open_Dough_Dungeon == false or game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") or not v.Parent or v.Humanoid.Health <= 0
 									end
 								end
 							else
@@ -7555,10 +7555,10 @@ end)
 								topos(CFrame.new(-1820.0634765625, 210.74781799316406, -12297.49609375))
 							end
 						end						
-					elseif game.ReplicatedStorage:FindFirstChild("Dough King") or game:GetService("Workspace").Enemies:FindFirstChild("Dough King") then
-						if game:GetService("Workspace").Enemies:FindFirstChild("Dough King") then
+					elseif game.ReplicatedStorage:FindFirstChild("Dough King [Lv. 2300] [Raid Boss]") or game:GetService("Workspace").Enemies:FindFirstChild("Dough King [Lv. 2300] [Raid Boss]") then
+						if game:GetService("Workspace").Enemies:FindFirstChild("Dough King [Lv. 2300] [Raid Boss]") then
 							for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do 
-								if v.Name == "Dough King" then
+								if v.Name == "Dough King [Lv. 2300] [Raid Boss]" then
 									repeat wait()
 										AutoHaki()
 										EquipWeapon(_G.Select_Weapon)
@@ -7583,9 +7583,9 @@ end)
 					else
 						if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
 							if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Diablo") or string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Deandre") or string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Urban") then
-								if game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
+								if game:GetService("Workspace").Enemies:FindFirstChild("Diablo [Lv. 1750]") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre [Lv. 1750]") or game:GetService("Workspace").Enemies:FindFirstChild("Urban [Lv. 1750]") then
 									for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-										if v.Name == "Diablo" or v.Name == "Deandre" or v.Name == "Urban" then
+										if v.Name == "Diablo [Lv. 1750]" or v.Name == "Deandre [Lv. 1750]" or v.Name == "Urban [Lv. 1750]" then
 											if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
 												repeat wait()
 													AutoHaki()
@@ -7602,12 +7602,12 @@ end)
 										end
 									end
 								else
-									if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") then
-										topos(game:GetService("ReplicatedStorage"):FindFirstChild("Diablo").HumanoidRootPart.CFrame * MethodFarm)
-									elseif game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") then
-										topos(game:GetService("ReplicatedStorage"):FindFirstChild("Deandre").HumanoidRootPart.CFrame * MethodFarm)
-									elseif game:GetService("ReplicatedStorage"):FindFirstChild("Urban") then
-										topos(game:GetService("ReplicatedStorage"):FindFirstChild("Urban").HumanoidRootPart.CFrame * MethodFarm)
+									if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo [Lv. 1750]") then
+										topos(game:GetService("ReplicatedStorage"):FindFirstChild("Diablo [Lv. 1750]").HumanoidRootPart.CFrame * MethodFarm)
+									elseif game:GetService("ReplicatedStorage"):FindFirstChild("Deandre [Lv. 1750]") then
+										topos(game:GetService("ReplicatedStorage"):FindFirstChild("Deandre [Lv. 1750]").HumanoidRootPart.CFrame * MethodFarm)
+									elseif game:GetService("ReplicatedStorage"):FindFirstChild("Urban [Lv. 1750]") then
+										topos(game:GetService("ReplicatedStorage"):FindFirstChild("Urban [Lv. 1750]").HumanoidRootPart.CFrame * MethodFarm)
 									end
 								end                    
 							end
@@ -7662,10 +7662,10 @@ end)
 					if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
 						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("HornedMan","Bet")
 					elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Stone") then
-						if _G.Auto_Rainbow_Haki and game.ReplicatedStorage:FindFirstChild("Stone") or game.Workspace.Enemies:FindFirstChild("Stone") then
-							if game:GetService("Workspace").Enemies:FindFirstChild("Stone") then
+						if _G.Auto_Rainbow_Haki and game.ReplicatedStorage:FindFirstChild("Stone [Lv. 1550] [Boss]") or game.Workspace.Enemies:FindFirstChild("Stone [Lv. 1550] [Boss]") then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Stone [Lv. 1550] [Boss]") then
 								for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-									if v.Name == "Stone" then
+									if v.Name == "Stone [Lv. 1550] [Boss]" then
 										OldCFrameRainbow = v.HumanoidRootPart.CFrame
 										repeat wait()
 											AutoHaki()
@@ -7689,10 +7689,10 @@ end)
 							end
 						end
 					elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Island Empress") then
-						if _G.Auto_Rainbow_Haki and game.ReplicatedStorage:FindFirstChild("Island Empress") or game.Workspace.Enemies:FindFirstChild("Island Empress") then
-							if game:GetService("Workspace").Enemies:FindFirstChild("Island Empress") then
+						if _G.Auto_Rainbow_Haki and game.ReplicatedStorage:FindFirstChild("Island Empress [Lv. 1675] [Boss]") or game.Workspace.Enemies:FindFirstChild("Island Empress [Lv. 1675] [Boss]") then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Island Empress [Lv. 1675] [Boss]") then
 								for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-									if v.Name == "Island Empress" then
+									if v.Name == "Island Empress [Lv. 1675] [Boss]" then
 										OldCFrameRainbow = v.HumanoidRootPart.CFrame
 										repeat wait()
 											AutoHaki()
@@ -7716,10 +7716,10 @@ end)
 							end
 						end
 					elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Kilo Admiral") then
-						if _G.Auto_Rainbow_Haki and game.ReplicatedStorage:FindFirstChild("Kilo Admiral") or game.Workspace.Enemies:FindFirstChild("Kilo Admiral") then
-							if game:GetService("Workspace").Enemies:FindFirstChild("Kilo Admiral") then
+						if _G.Auto_Rainbow_Haki and game.ReplicatedStorage:FindFirstChild("Kilo Admiral [Lv. 1750] [Boss]") or game.Workspace.Enemies:FindFirstChild("Kilo Admiral [Lv. 1750] [Boss]") then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Kilo Admiral [Lv. 1750] [Boss]") then
 								for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-									if v.Name == "Kilo Admiral" then
+									if v.Name == "Kilo Admiral [Lv. 1750] [Boss]" then
 										OldCFrameRainbow = v.HumanoidRootPart.CFrame
 										repeat wait()
 											AutoHaki()
@@ -7743,10 +7743,10 @@ end)
 							end
 						end
 					elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Captain Elephant") then
-						if _G.Auto_Rainbow_Haki and game.ReplicatedStorage:FindFirstChild("Captain Elephant") or game.Workspace.Enemies:FindFirstChild("Captain Elephant") then
-							if game:GetService("Workspace").Enemies:FindFirstChild("Captain Elephant") then
+						if _G.Auto_Rainbow_Haki and game.ReplicatedStorage:FindFirstChild("Captain Elephant [Lv. 1875] [Boss]") or game.Workspace.Enemies:FindFirstChild("Captain Elephant [Lv. 1875] [Boss]") then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Captain Elephant [Lv. 1875] [Boss]") then
 								for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-									if v.Name == "Captain Elephant" then
+									if v.Name == "Captain Elephant [Lv. 1875] [Boss]" then
 										OldCFrameRainbow = v.HumanoidRootPart.CFrame
 										repeat wait()
 											AutoHaki()
@@ -7770,10 +7770,10 @@ end)
 							end
 						end
 					elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Beautiful Pirate") then
-						if _G.Auto_Rainbow_Haki and game.ReplicatedStorage:FindFirstChild("Beautiful Pirate") or game.Workspace.Enemies:FindFirstChild("Beautiful Pirate") then
-							if game:GetService("Workspace").Enemies:FindFirstChild("Beautiful Pirate") then
+						if _G.Auto_Rainbow_Haki and game.ReplicatedStorage:FindFirstChild("Beautiful Pirate [Lv. 1950] [Boss]") or game.Workspace.Enemies:FindFirstChild("Beautiful Pirate [Lv. 1950] [Boss]") then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Beautiful Pirate [Lv. 1950] [Boss]") then
 								for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-									if v.Name == "Beautiful Pirate\" then
+									if v.Name == "Beautiful Pirate [Lv. 1950] [Boss]" then
 										OldCFrameRainbow = v.HumanoidRootPart.CFrame
 										repeat wait()
 											AutoHaki()
@@ -7822,10 +7822,10 @@ end)
 		while wait() do
 			if _G.Auto_Canvander then
 				pcall(function()
-					if _G.Auto_Canvander and game.ReplicatedStorage:FindFirstChild("Beautiful Pirate") or game.Workspace.Enemies:FindFirstChild("Beautiful Pirate") then
-						if game.Workspace.Enemies:FindFirstChild("Beautiful Pirate") then
+					if _G.Auto_Canvander and game.ReplicatedStorage:FindFirstChild("Beautiful Pirate [Lv. 1950] [Boss]") or game.Workspace.Enemies:FindFirstChild("Beautiful Pirate [Lv. 1950] [Boss]") then
+						if game.Workspace.Enemies:FindFirstChild("Beautiful Pirate [Lv. 1950] [Boss]") then
 							for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-								if v.Name == "Beautiful Pirate" and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+								if v.Name == "Beautiful Pirate [Lv. 1950] [Boss]" and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
 									repeat wait()
 										AutoHaki()
 										EquipWeapon(_G.Select_Weapon)
@@ -7866,10 +7866,10 @@ end)
 		while wait() do
 			if _G.Auto_Twin_Hook then
 				pcall(function()
-					if _G.Auto_Twin_Hook and game.ReplicatedStorage:FindFirstChild("Captain Elephant") or game.Workspace.Enemies:FindFirstChild("Captain Elephant") then
-						if game.Workspace.Enemies:FindFirstChild("Captain Elephant") then
+					if _G.Auto_Twin_Hook and game.ReplicatedStorage:FindFirstChild("Captain Elephant [Lv. 1875] [Boss]") or game.Workspace.Enemies:FindFirstChild("Captain Elephant [Lv. 1875] [Boss]") then
+						if game.Workspace.Enemies:FindFirstChild("Captain Elephant [Lv. 1875] [Boss]") then
 							for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-								if v.Name == "Captain Elephant" and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+								if v.Name == "Captain Elephant [Lv. 1875] [Boss]" and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
 									repeat wait()
 										AutoHaki()
 										EquipWeapon(_G.Select_Weapon)
@@ -7910,10 +7910,10 @@ end)
 		while wait() do
 			if _G.Auto_Serpent_Bow then
 				pcall(function()
-					if _G.Auto_Serpent_Bow and game.ReplicatedStorage:FindFirstChild("Island Empress") or game.Workspace.Enemies:FindFirstChild("Island Empress") then
-						if game.Workspace.Enemies:FindFirstChild("Island Empress") then
+					if _G.Auto_Serpent_Bow and game.ReplicatedStorage:FindFirstChild("Island Empress [Lv. 1675] [Boss]") or game.Workspace.Enemies:FindFirstChild("Island Empress [Lv. 1675] [Boss]") then
+						if game.Workspace.Enemies:FindFirstChild("Island Empress [Lv. 1675] [Boss]") then
 							for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-								if v.Name == "Island Empress" and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+								if v.Name == "Island Empress [Lv. 1675] [Boss]" and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
 									repeat wait()
 										AutoHaki()
 										EquipWeapon(_G.Select_Weapon)
@@ -7946,9 +7946,9 @@ Weapon:Toggle("Auto Tushita Sword",_G.Autotushita,function(value)
 spawn(function()
 		while wait() do
 					if _G.Autotushita then
-						if game:GetService("Workspace").Enemies:FindFirstChild("Longma ") then
+						if game:GetService("Workspace").Enemies:FindFirstChild("Longma [Lv. 2000] [Boss]") then
 							for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-								if v.Name == ("Longma" or v.Name == "Longma") and v.Humanoid.Health > 0 and v:IsA("Model") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") then
+								if v.Name == ("Longma [Lv. 2000] [Boss]" or v.Name == "Longma [Lv. 2000] [Boss]") and v.Humanoid.Health > 0 and v:IsA("Model") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") then
 									repeat wait()
 										StartMagnet = true
 										AutoHaki()
@@ -8034,9 +8034,9 @@ Weapon:Toggle("Auto Observation Haki V2",_G.AutoObservationHakiV2,function(x)
 							until _G.StopTween == true or not _G.AutoObservationHakiV2 or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-13277.568359375, 370.34185791016, -7821.1572265625)).Magnitude <= 10
 						end
 					elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text ==  "Defeat  Captain Elephant (0/1)" then 
-						if game:GetService("Workspace").Enemies:FindFirstChild("Captain Elephant") then
+						if game:GetService("Workspace").Enemies:FindFirstChild("Captain Elephant [Lv. 1875] [Boss]") then
 							for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-								if v.Name == "Captain Elephant" then
+								if v.Name == "Captain Elephant [Lv. 1875] [Boss]" then
 									repeat wait()
 										if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
 											game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
@@ -8123,8 +8123,8 @@ Weapon:Toggle("Auto Observation Haki V2",_G.AutoObservationHakiV2,function(x)
 				game:GetService("RunService").Heartbeat:Wait()
 				if _G.AutoObservationHakiV2 and StatrMagnet then
 					for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-						if v.Name == "Forest Pirate" and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-							if v.Name == "Forest Pirate" then
+						if v.Name == "Forest Pirate [Lv. 1825]" and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+							if v.Name == "Forest Pirate [Lv. 1825]" then
 								v.HumanoidRootPart.CanCollide = false
 								v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
 								v.HumanoidRootPart.CFrame = PosHee
@@ -8179,7 +8179,7 @@ Weapon:Toggle("Auto Observation Haki V2",_G.AutoObservationHakiV2,function(x)
 		game:GetService("RunService").Heartbeat:Connect(function()
 			pcall(function()
 				for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-					if _G.Auto_Bartilo_Quest and AutoBartiloBring and v.Name == "Swan Pirate" and (v.HumanoidRootPart.Position - PosMonBarto.Position).magnitude <= 350 then
+					if _G.Auto_Bartilo_Quest and AutoBartiloBring and v.Name == "Swan Pirate [Lv. 775]" and (v.HumanoidRootPart.Position - PosMonBarto.Position).magnitude <= 350 then
 						v.HumanoidRootPart.CFrame = PosMonBarto
 						v.HumanoidRootPart.CanCollide = false
 						v.HumanoidRootPart.Size = Vector3.new(50,50,50)
@@ -8199,9 +8199,9 @@ Weapon:Toggle("Auto Observation Haki V2",_G.AutoObservationHakiV2,function(x)
 				if _G.Auto_Bartilo_Quest then
 					if game:GetService("Players").LocalPlayer.Data.Level.Value >= 800 and game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BartiloQuestProgress","Bartilo") == 0 then
 						if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Swan Pirates") and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "50") and game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then 
-							if game:GetService("Workspace").Enemies:FindFirstChild("Swan Pirate") then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Swan Pirate [Lv. 775]") then
 								for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-									if v.Name == "Swan Pirate" then
+									if v.Name == "Swan Pirate [Lv. 775]" then
 										pcall(function()
 											repeat wait()
 												AutoHaki()
@@ -8228,9 +8228,9 @@ Weapon:Toggle("Auto Observation Haki V2",_G.AutoObservationHakiV2,function(x)
 							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest","BartiloQuest",1)
 						end 
 					elseif game:GetService("Players").LocalPlayer.Data.Level.Value >= 800 and game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BartiloQuestProgress","Bartilo") == 1 then
-						if game:GetService("Workspace").Enemies:FindFirstChild("Jeremy") then
+						if game:GetService("Workspace").Enemies:FindFirstChild("Jeremy [Lv. 850] [Boss]") then
 							for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-								if v.Name == "Jeremy" then
+								if v.Name == "Jeremy [Lv. 850] [Boss]" then
 									OldCFrameBartlio = v.HumanoidRootPart.CFrame
 									repeat wait()
 										sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
@@ -8247,7 +8247,7 @@ Weapon:Toggle("Auto Observation Haki V2",_G.AutoObservationHakiV2,function(x)
 									until not v.Parent or v.Humanoid.Health <= 0 or _G.Auto_Bartilo_Quest == false
 								end
 							end
-						elseif game:GetService("ReplicatedStorage"):FindFirstChild("Jeremy") then
+						elseif game:GetService("ReplicatedStorage"):FindFirstChild("Jeremy [Lv. 850] [Boss]") then
 							repeat topos(CFrame.new(-456.28952, 73.0200958, 299.895966)) wait() until not _G.Auto_Bartilo_Quest or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-456.28952, 73.0200958, 299.895966)).Magnitude <= 10
 							wait(1.1)
 							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BartiloQuestProgress","Bartilo")
@@ -8293,7 +8293,7 @@ end)
 		game:GetService("RunService").Heartbeat:Connect(function()
 			pcall(function()
 				for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-					if _G.Auto_Musketeer_Hat and StartMagnetMusketeerhat and v.Name == "Forest Pirate" and (v.HumanoidRootPart.Position - MusketeerHatMon.Position).magnitude <= 350 then
+					if _G.Auto_Musketeer_Hat and StartMagnetMusketeerhat and v.Name == "Forest Pirate [Lv. 1825]" and (v.HumanoidRootPart.Position - MusketeerHatMon.Position).magnitude <= 350 then
 						v.HumanoidRootPart.CFrame = MusketeerHatMon
 						v.HumanoidRootPart.CanCollide = false
 						v.HumanoidRootPart.Size = Vector3.new(50,50,50)
@@ -8313,9 +8313,9 @@ end)
 				if _G.Auto_Musketeer_Hat then
 					if game:GetService("Players").LocalPlayer.Data.Level.Value >= 1800 and game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CitizenQuestProgress").KilledBandits == false then
 						if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Forest Pirate") and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "50") and game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-							if game:GetService("Workspace").Enemies:FindFirstChild("Forest Pirate") then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Forest Pirate [Lv. 1825]") then
 								for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-									if v.Name == "Forest Pirate" then
+									if v.Name == "Forest Pirate [Lv. 1825]" then
 										repeat wait()
 											pcall(function()
 												AutoHaki()
@@ -8345,9 +8345,9 @@ end)
 						end
 					elseif game:GetService("Players").LocalPlayer.Data.Level.Value >= 1800 and game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CitizenQuestProgress").KilledBoss == false then
 						if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Captain Elephant") and game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-							if game:GetService("Workspace").Enemies:FindFirstChild("Captain Elephant") then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Captain Elephant [Lv. 1875] [Boss]") then
 								for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-									if v.Name == "Captain Elephant" then
+									if v.Name == "Captain Elephant [Lv. 1875] [Boss]" then
 										OldCFrameElephant = v.HumanoidRootPart.CFrame
 										repeat wait()
 											pcall(function()
@@ -8576,10 +8576,10 @@ spawn(function()
 							wait(0.5)
 						end
 					elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value >= 450 or game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Character:FindFirstChild("Black Leg").Level.Value >= 450 then   
-						if game:GetService("ReplicatedStorage"):FindFirstChild("Awakened Ice Admiral") or game:GetService("Workspace").Enemies:FindFirstChild("Awakened Ice Admiral") then
-							if game:GetService("Workspace").Enemies:FindFirstChild("Awakened Ice Admiral") then 	
+						if game:GetService("ReplicatedStorage"):FindFirstChild("Awakened Ice Admiral [Lv. 1400] [Boss]") or game:GetService("Workspace").Enemies:FindFirstChild("Awakened Ice Admiral [Lv. 1400] [Boss]") then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Awakened Ice Admiral [Lv. 1400] [Boss]") then 	
 								for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-									if v.Name == "Awakened Ice Admiral" then    
+									if v.Name == "Awakened Ice Admiral [Lv. 1400] [Boss]" then    
 										repeat wait()
 											AutoHaki()
 											EquipWeapon(_G.Select_Weapon)
@@ -8595,7 +8595,7 @@ spawn(function()
 									end
 								end
 							else
-								repeat wait() topos(game:GetService("ReplicatedStorage"):FindFirstChild("Awakened Ice Admiral").HumanoidRootPart.CFrame) until game:GetService("Workspace").Enemies:FindFirstChild("Awakened Ice Admiral")
+								repeat wait() topos(game:GetService("ReplicatedStorage"):FindFirstChild("Awakened Ice Admiral [Lv. 1400] [Boss]").HumanoidRootPart.CFrame) until game:GetService("Workspace").Enemies:FindFirstChild("Awakened Ice Admiral [Lv. 1400] [Boss]")
 							end
 						else 
 							hop()
@@ -8661,10 +8661,10 @@ spawn(function()
 							wait(0.5)
 						end
 					elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate").Level.Value >= 400 or game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate").Level.Value >= 400 then   
-						if game:GetService("ReplicatedStorage"):FindFirstChild("Tide Keeper") or game:GetService("Workspace").Enemies:FindFirstChild("Tide Keeper") then
-							if game:GetService("Workspace").Enemies:FindFirstChild("Tide Keeper") then 	
+						if game:GetService("ReplicatedStorage"):FindFirstChild("Tide Keeper [Lv. 1475] [Boss]") or game:GetService("Workspace").Enemies:FindFirstChild("Tide Keeper [Lv. 1475] [Boss]") then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Tide Keeper [Lv. 1475] [Boss]") then 	
 								for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-									if v.Name == "Tide Keeper" then    
+									if v.Name == "Tide Keeper [Lv. 1475] [Boss]" then    
 										repeat wait()
 											AutoHaki()
 											EquipWeapon(_G.Select_Weapon)
@@ -8680,7 +8680,7 @@ spawn(function()
 									end
 								end
 							else
-								repeat wait() topos(game:GetService("ReplicatedStorage"):FindFirstChild("Tide Keeper").HumanoidRootPart.CFrame) until game:GetService("Workspace").Enemies:FindFirstChild("Tide Keeper")
+								repeat wait() topos(game:GetService("ReplicatedStorage"):FindFirstChild("Tide Keeper [Lv. 1475] [Boss]").HumanoidRootPart.CFrame) until game:GetService("Workspace").Enemies:FindFirstChild("Tide Keeper [Lv. 1475] [Boss]")
 							end
 						else
 							hop()
