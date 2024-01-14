@@ -15,7 +15,7 @@ local ThunderImageUI = Instance.new("ImageLabel")
         ThunderToggleUI.Size = UDim2.new(0, 50, 0, 50)
         ThunderToggleUI.Font = Enum.Font.SourceSans
         ThunderToggleUI.Text = ""
-        ThunderToggleUI.TextColor3 = Color3.fromRGB(0, 0, 0)
+        ThunderToggleUI.TextColor3 = Color3.fromRGB(255, 255, 255)
         ThunderToggleUI.TextSize = 14.000
         ThunderToggleUI.Draggable = true
         ThunderToggleUI.MouseButton1Click:Connect(function()
@@ -2114,7 +2114,7 @@ function CheckQuest()
 			CFrameQuest = CFrame.new(632.698608, 73.1055908, 918.666321, -0.0319722369, 8.96074881e-10, -0.999488771, 1.36326533e-10, 1, 8.92172336e-10, 0.999488771, -1.07732087e-10, -0.0319722369)
 			CFrameMon = CFrame.new(296.786499, 72.9948196, -57.1298141, -0.876037002, -5.32364979e-08, 0.482243896, -3.87658332e-08, 1, 3.99718729e-08, -0.482243896, 1.63222538e-08, -0.876037002)
 			SPAWNPOINT = "DressTown"
-		elseif MyLevel == 875 or MyLevel <= 899 or _G.Select_Mob_Farm == "Marine Lieutenan" then -- Marine Lieutenant [Lv. 875]
+		elseif MyLevel == 875 or MyLevel <= 899 or _G.Select_Mob_Farm == "Marine Lieutenant" then -- Marine Lieutenant [Lv. 875]
 			Ms = "Marine Lieutenant"
 			NameQuest = "MarineQuest3"
 			LevelQuest = 1
@@ -3826,7 +3826,7 @@ spawn(function()
  while wait() do
  if _G.Auto_Farm_Ectoplasm then
  pcall(function()
-  if game:GetService("Workspace").Enemies:FindFirstChild("Ship Deckhand") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Engineer [Lv. 1275]") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Steward [Lv. 1300]") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Officer [Lv. 1325]") then
+  if game:GetService("Workspace").Enemies:FindFirstChild("Ship Deckhand") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Engineer") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Steward") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Officer") then
   for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
   if string.find(v.Name, "Ship") then
   repeat wait()
