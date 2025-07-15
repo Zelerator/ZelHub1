@@ -1,7 +1,3 @@
-
-/*this script should auto equip weight, auto click, if muscle value is 50% of the next weight cost it will Sell muscle. 
-If stage is 29+ then it will switch between weight and stomp every 10 seconds of weight, 500 miliseconds of stomp.
-*/
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local UserInputService = game:GetService("UserInputService")
@@ -23,7 +19,7 @@ local SELL_THRESHOLDS = {
     ["7TH ULTIMATE CLASS"] = 38.5e90, ["8TH ULTIMATE CLASS"] = 38.5e90, ["9TH ULTIMATE CLASS"] = 1.275e93,
     ["1ST SUPREME CLASS"] = 7.5e93, ["2ND SUPREME CLASS"] = 44.75e93, ["3RD SUPREME CLASS"] = 262.5e93,
     ["4TH SUPREME CLASS"] = 8.45e96, ["5TH SUPREME CLASS"] = 50e96, ["6TH SUPREME CLASS"] = 297.5e96,
-    ["7TH SUPREME CLASS"] = 1.875e99, ["8TH SUPREME CLASS"] = , ["9TH SUPREME CLASS"] = 77.5e99
+    ["7TH SUPREME CLASS"] = 1.875e99, ["8TH SUPREME CLASS"] = 11.5e99, ["9TH SUPREME CLASS"] = 77.5e99
 }
 
 local CLASS_HIERARCHY = {}
