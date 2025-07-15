@@ -1,26 +1,71 @@
+
+/*this script should auto equip weight, auto click, if muscle value is 50% of the next weight cost it will Sell muscle. 
+If stage is 29+ then it will switch between weight and stomp every 10 seconds of weight, 500 miliseconds of stomp.
+*/
 local Players = game:GetService("Players")
-local player = Players.LocalPlayer
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 
--- GUI Setup
-local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
-screenGui.Name = "AutoFarmGui"
+local player = Players.LocalPlayer
 
-local frame = Instance.new("Frame", screenGui)
+-- Class thresholds
+local SELL_THRESHOLDS = {
+    ["Godly 1st Class"] = 4.015e59, ["Godly 2nd Class"] = 9.8e60, ["Godly 3rd Class"] = 1.395e62,
+    ["Godly 4th Class"] = 3.555e62, ["Godly 5th Class"] = 9.55e63, ["Godly 6th Class"] = 1.11e65,
+    ["Godly 7th Class"] = 2.995e65, ["Godly 8th Class"] = 7.75e66, ["Godly 9th Class"] = 1.75e69,
+    ["1ST SUPER CLASS"] = 1.06e70, ["2ND SUPER CLASS"] = 6.45e70, ["3RD SUPER CLASS"] = 3.995e71,
+    ["4TH SUPER CLASS"] = 2.625e72, ["5TH SUPER CLASS"] = 1.675e73, ["6TH SUPER CLASS"] = 0.575e78,
+    ["7TH SUPER CLASS"] = 3.6e78, ["8TH SUPER CLASS"] = 7.5e78, ["9TH SUPER CLASS"] = 132.5e78,
+    ["10TH SUPER CLASS"] = 0.795e81, ["11TH SUPER CLASS"] = 4.665e81,
+    ["1ST ULTIMATE CLASS"] = 1.825e84, ["2ND ULTIMATE CLASS"] = 10.8e84, ["3RD ULTIMATE CLASS"] = 64.5e84,
+    ["4TH ULTIMATE CLASS"] = 366.5e84, ["5TH ULTIMATE CLASS"] = 32.165e87, ["6TH ULTIMATE CLASS"] = 12.75e87,
+    ["7TH ULTIMATE CLASS"] = 38.5e90, ["8TH ULTIMATE CLASS"] = 38.5e90, ["9TH ULTIMATE CLASS"] = 1.275e93,
+    ["1ST SUPREME CLASS"] = 7.5e93, ["2ND SUPREME CLASS"] = 44.75e93, ["3RD SUPREME CLASS"] = 262.5e93,
+    ["4TH SUPREME CLASS"] = 8.45e96, ["5TH SUPREME CLASS"] = 50e96, ["6TH SUPREME CLASS"] = 297.5e96,
+    ["7TH SUPREME CLASS"] = 1.875e99, ["8TH SUPREME CLASS"] = , ["9TH SUPREME CLASS"] = 77.5e99
+}
+
+local CLASS_HIERARCHY = {}
+for className in pairs(SELL_THRESHOLDS) do
+    table.insert(CLASS_HIERARCHY, className)
+end
+table.sort(CLASS_HIERARCHY, function(a, b)
+    return SELL_THRESHOLDS[a] < SELL_THRESHOLDS[b]
+end)
+
+local BLACKLIST = {"Athena", "Cronus", "Hades", "Hercules", "Poseidon", "Zeus", "Ares", "Fist", "Foot"}
+
+-- Performance-optimized variables
+local autoSellEnabled = false
+local currentClass = nil
+local muscleConnection, classCheckConnection
+local runningLoops = {}
+local debounce = false
+local itemCache = {}
+local lastCacheUpdate = 0
+
+-- GUI Setup
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "AutoFarmGui"
+screenGui.Parent = player:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
 frame.Size = UDim2.new(0, 250, 0, 100)
 frame.Position = UDim2.new(0.5, -125, 0.1, 0)
 frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 frame.Active = true
+frame.Parent = screenGui
 
 -- Drag Support
 local dragging, dragInput, dragStart, startPos
+
 frame.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 then
         dragging = true
         dragStart = input.Position
         startPos = frame.Position
+        
         input.Changed:Connect(function()
             if input.UserInputState == Enum.UserInputState.End then
                 dragging = false
@@ -38,12 +83,15 @@ end)
 UserInputService.InputChanged:Connect(function(input)
     if dragging and input == dragInput then
         local delta = input.Position - dragStart
-        frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        frame.Position = UDim2.new(
+            startPos.X.Scale, startPos.X.Offset + delta.X,
+            startPos.Y.Scale, startPos.Y.Offset + delta.Y
+        )
     end
 end)
 
 -- UI Elements
-local topLabel = Instance.new("TextLabel", frame)
+local topLabel = Instance.new("TextLabel")
 topLabel.Size = UDim2.new(1, 0, 0.2, 0)
 topLabel.Position = UDim2.new(0, 0, 0, 0)
 topLabel.Text = "Reborn One Click"
@@ -51,8 +99,9 @@ topLabel.Font = Enum.Font.SourceSansBold
 topLabel.TextSize = 30
 topLabel.TextColor3 = Color3.fromRGB(255, 255, 0)
 topLabel.BackgroundTransparency = 1
+topLabel.Parent = frame
 
-local toggleButton = Instance.new("TextButton", frame)
+local toggleButton = Instance.new("TextButton")
 toggleButton.Size = UDim2.new(0.5, 0, 0.3, 0)
 toggleButton.Position = UDim2.new(0.25, 0, 0.35, 0)
 toggleButton.Text = "OFF"
@@ -60,8 +109,9 @@ toggleButton.Font = Enum.Font.SourceSansBold
 toggleButton.TextSize = 18
 toggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 toggleButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+toggleButton.Parent = frame
 
-local statusLabel = Instance.new("TextLabel", frame)
+local statusLabel = Instance.new("TextLabel")
 statusLabel.Size = UDim2.new(1, 0, 0.25, 0)
 statusLabel.Position = UDim2.new(0, 0, 0.7, 0)
 statusLabel.Text = "Auto-Sell: Disabled | Class: None"
@@ -69,8 +119,9 @@ statusLabel.Font = Enum.Font.SourceSansBold
 statusLabel.TextSize = 14
 statusLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 statusLabel.BackgroundTransparency = 1
+statusLabel.Parent = frame
 
-local closeButton = Instance.new("TextButton", frame)
+local closeButton = Instance.new("TextButton")
 closeButton.Size = UDim2.new(0, 24, 0, 24)
 closeButton.Position = UDim2.new(1, -28, 0, 4)
 closeButton.Text = "X"
@@ -78,93 +129,84 @@ closeButton.Font = Enum.Font.SourceSansBold
 closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 closeButton.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
 closeButton.BorderSizePixel = 0
-closeButton.MouseButton1Click:Connect(function()
-    frame.Visible = false
-end)
+closeButton.Parent = frame
 
--- Auto Functions
-local autoSellEnabled = false
-local currentClass = nil
-local muscleConnection, classCheckConnection
-local runningLoops = {} -- Initialize loop tracking table
-
-local SELL_THRESHOLDS = {
-    ["Godly 1st Class"] = 1.71e59, ["Godly 2nd Class"] = 4.015e59, ["Godly 3rd Class"] = 9.8e60,
-    ["Godly 4th Class"] = 1.395e62, ["Godly 5th Class"] = 3.555e62, ["Godly 6th Class"] = 9.55e63,
-    ["Godly 7th Class"] = 1.11e65, ["Godly 8th Class"] = 2.995e65, ["Godly 9th Class"] = 7.75e66,
-    ["1ST SUPER CLASS"] = 1.75e69, ["2ND SUPER CLASS"] = 1.06e70, ["3RD SUPER CLASS"] = 6.45e70,
-    ["4TH SUPER CLASS"] = 3.995e71, ["5TH SUPER CLASS"] = 2.625e72, ["6TH SUPER CLASS"] = 1.675e73,
-    ["7TH SUPER CLASS"] = 0.575e78, ["8TH SUPER CLASS"] = 3.6e78, ["9TH SUPER CLASS"] = 21.5e78,
-    ["10TH SUPER CLASS"] = 132.5e78, ["11TH SUPER CLASS"] = 0.795e81,
-    ["1ST ULTIMATE CLASS"] = 4.665e81, ["2ND ULTIMATE CLASS"] = 1.825e84, ["3RD ULTIMATE CLASS"] = 10.8e84,
-    ["4TH ULTIMATE CLASS"] = 64.5e84, ["5TH ULTIMATE CLASS"] = 366.5e84, ["6TH ULTIMATE CLASS"] = 2.165e87,
-    ["7TH ULTIMATE CLASS"] = 12.75e87, ["8TH ULTIMATE CLASS"] = 38.5e90, ["9TH ULTIMATE CLASS"] = 212.5e90,
-    ["1ST SUPREME CLASS"] = 1.275e93, ["2ND SUPREME CLASS"] = 7.5e93, ["3RD SUPREME CLASS"] = 44.75e93,
-    ["4TH SUPREME CLASS"] = 262.5e93, ["5TH SUPREME CLASS"] = 8.45e96, ["6TH SUPREME CLASS"] = 50e96,
-    ["7TH SUPREME CLASS"] = 297.5e96, ["8TH SUPREME CLASS"] = 1.875e99, ["9TH SUPREME CLASS"] = 11.5e99,
-    ["ULTIMATE SUPREME CLASS"] = 77.5e99
-}
-
-local CLASS_HIERARCHY = {}
-for className in pairs(SELL_THRESHOLDS) do
-    table.insert(CLASS_HIERARCHY, className)
-end
-table.sort(CLASS_HIERARCHY, function(a, b)
-    return SELL_THRESHOLDS[a] < SELL_THRESHOLDS[b]
-end)
-
-local function hasItem(itemName)
-    -- Check backpack
+-- Optimized Item Checking System
+local function updateItemCache()
+    local now = os.clock()
+    if now - lastCacheUpdate < 2 then return end -- Only update cache every 2 seconds
+    
+    itemCache = {} -- Reset cache
+    
+    -- Check Backpack
     local backpack = player:FindFirstChild("Backpack")
-    if backpack and backpack:FindFirstChild(itemName) then 
-        return true 
+    if backpack then
+        for _, item in ipairs(backpack:GetChildren()) do
+            if item:IsA("Tool") then
+                itemCache[item.Name] = true
+            end
+        end
     end
 
-    -- Check character
+    -- Check Character
     local character = player.Character
     if character then
-        -- Check for tools directly in character
-        if character:FindFirstChild(itemName) then
-            return true
+        -- Check tools in character
+        for _, item in ipairs(character:GetChildren()) do
+            if item:IsA("Tool") then
+                itemCache[item.Name] = true
+            end
         end
 
-        -- Check humanoid equipped tool
+        -- Check equipped tool
         local humanoid = character:FindFirstChildOfClass("Humanoid")
         if humanoid then
-            local equippedTool = humanoid:FindFirstChildOfClass("Tool")
-            if equippedTool and equippedTool.Name == itemName then
-                return true
+            local equipped = humanoid:FindFirstChildOfClass("Tool")
+            if equipped then
+                itemCache[equipped.Name] = true
+            end
+        end
+
+        -- Check for class parts
+        for _, part in ipairs(character:GetDescendants()) do
+            if part:IsA("BasePart") and SELL_THRESHOLDS[part.Name] then
+                itemCache[part.Name] = true
             end
         end
     end
-
-    -- Check workspace Origin_Uron
-    local originUron = workspace:FindFirstChild("Origin_Uron")
-    if originUron then
-        for _, item in ipairs(originUron:GetDescendants()) do
-            if item.Name == itemName and item:IsA("BasePart") then
-                return true
-            end
-        end
-    end
-
-    return false
+    
+    lastCacheUpdate = now
 end
 
+local function hasItem(itemName)
+    updateItemCache() -- Updates cache (throttled)
+    return itemCache[itemName] == true
+end
 
-
+-- Class Management
 local function updateCurrentClass()
     for i = #CLASS_HIERARCHY, 1, -1 do
         if hasItem(CLASS_HIERARCHY[i]) then
-            currentClass = CLASS_HIERARCHY[i]
-            statusLabel.Text = "Auto-Sell: "..(autoSellEnabled and "Enabled" or "Disabled").." | Class: "..currentClass
+            if currentClass ~= CLASS_HIERARCHY[i] then
+                currentClass = CLASS_HIERARCHY[i]
+                statusLabel.Text = string.format("Auto-Sell: %s | Class: %s",
+                    autoSellEnabled and "Enabled" or "Disabled",
+                    currentClass
+                )
+            end
             return
         end
     end
-    currentClass = nil
-    statusLabel.Text = "Auto-Sell: "..(autoSellEnabled and "Enabled" or "Disabled").." | Class: None"
+    
+    if currentClass ~= nil then
+        currentClass = nil
+        statusLabel.Text = string.format("Auto-Sell: %s | Class: None",
+            autoSellEnabled and "Enabled" or "Disabled"
+        )
+    end
 end
 
+-- Muscle Selling
 local function checkAndSellMuscle()
     if not currentClass then 
         print("No class detected - can't sell")
@@ -184,14 +226,10 @@ local function checkAndSellMuscle()
     end
     
     local threshold = SELL_THRESHOLDS[currentClass]
-    print("Muscle Check:", muscle.Value, "/", threshold)
+    print("Muscle Check:", muscle.Value, "/", threshold) -- This line was missing
     
     if muscle.Value >= threshold then
-        local args = {
-            [1] = {
-                [1] = "SellMuscle"
-            }
-        }
+        local args = {[1] = {[1] = "SellMuscle"}}
         
         print("Attempting to sell muscle...")
         local success, err = pcall(function()
@@ -205,73 +243,55 @@ local function checkAndSellMuscle()
         end
     end
 end
+
+-- Class Checker
 local function startClassChecker()
     if classCheckConnection then classCheckConnection:Disconnect() end
+    
+    local checkCounter = 0
     classCheckConnection = RunService.Heartbeat:Connect(function()
-        pcall(updateCurrentClass)
+        checkCounter += 1
+        if checkCounter >= 30 then -- Check every 30 frames (~0.5s at 60fps)
+            checkCounter = 0
+            pcall(updateCurrentClass)
+        end
     end)
 end
 
 -- Tool Management
-local blacklist = {"Athena", "Cronus", "Hades", "Hercules", "Poseidon", "Zeus", "Ares", "Fist", "Foot"}
-
-local function equipTools()
+local function manageTools()
+    if not autoSellEnabled then return end
+    
     local character = player.Character
     if not character then return end
     
-    local humanoid = character:FindFirstChild("Humanoid")
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
     if not humanoid then return end
     
     local backpack = player:FindFirstChild("Backpack")
     if not backpack then return end
     
+    -- Equip non-blacklisted tools
     for _, item in ipairs(backpack:GetChildren()) do
-        if item:IsA("Tool") and not table.find(blacklist, item.Name) then
-            pcall(function()
-                humanoid:EquipTool(item)
-            end)
+        if item:IsA("Tool") and not table.find(BLACKLIST, item.Name) then
+            pcall(function() humanoid:EquipTool(item) end)
+        end
+    end
+    
+    -- Special foot handling
+    local leaderstats = player:FindFirstChild("leaderstats")
+    local stage = leaderstats and leaderstats:FindFirstChild("Stage")
+    if stage and stage.Value >= 29 then
+        local foot = backpack:FindFirstChild("Foot")
+        if foot then
+            task.wait(0.5)
+            pcall(function() humanoid:EquipTool(foot) end)
         end
     end
 end
 
-local function unequipTools()
-    local character = player.Character
-    if not character then return end
-    
-    local backpack = player:FindFirstChild("Backpack")
-    if not backpack then return end
-    
-    for _, tool in ipairs(character:GetChildren()) do
-        if tool:IsA("Tool") and not table.find(blacklist, tool.Name) then
-            pcall(function()
-                tool.Parent = backpack
-            end)
-        end
-    end
-end
-
-local function equipFoot()
-    local character = player.Character
-    if not character then return end
-    
-    local humanoid = character:FindFirstChild("Humanoid")
-    if not humanoid then return end
-    
-    local backpack = player:FindFirstChild("Backpack")
-    if not backpack then return end
-    
-    local foot = backpack:FindFirstChild("Foot")
-    if foot and foot:IsA("Tool") then
-        pcall(function()
-            humanoid:EquipTool(foot)
-        end)
-    end
-end
-
--- Main Toggle with Debounce
-local debounce = false
-
-toggleButton.MouseButton1Click:Connect(function()
+-- Main Toggle Function
+local function toggleAutoFarm()
     if debounce then return end
     debounce = true
     
@@ -281,40 +301,31 @@ toggleButton.MouseButton1Click:Connect(function()
     updateCurrentClass()
 
     if autoSellEnabled then
-        -- Start monitoring systems
+        -- Start systems
         startClassChecker()
         
-        if player:FindFirstChild("leaderstats") and player.leaderstats:FindFirstChild("Muscle") then
-            muscleConnection = player.leaderstats.Muscle:GetPropertyChangedSignal("Value"):Connect(function()
-                pcall(checkAndSellMuscle)
-            end)
+        -- Muscle monitoring
+        local leaderstats = player:FindFirstChild("leaderstats")
+        if leaderstats and leaderstats:FindFirstChild("Muscle") then
+            muscleConnection = leaderstats.Muscle:GetPropertyChangedSignal("Value"):Connect(checkAndSellMuscle)
         end
 
-        -- Auto Equip/Unequip
+        -- Optimized tool management
+        table.insert(runningLoops, task.spawn(function()
+            while autoSellEnabled do
+                pcall(manageTools)
+                task.wait(5) -- Reduced frequency
+            end
+        end))
+        
+        -- Optimized auto-clicker
         table.insert(runningLoops, task.spawn(function()
             while autoSellEnabled do
                 pcall(function()
-                    if player.Character and player.Character:FindFirstChild("Humanoid") then
-                        equipTools()
-                        task.wait(10)
-                        unequipTools()
-                        task.wait(0.1)
-                        equipFoot()
-                        task.wait(0.5)
-                        unequipTools()
-                        task.wait(0.1)
-                    end
+                    game:GetService("VirtualUser"):ClickButton1(Vector2.new(9e9, 9e9))
+                    task.wait(0.1) -- Added delay
                 end)
                 task.wait()
-            end
-        end))
-
-        
-        table.insert(runningLoops, task.spawn(function()
-            while autoSellEnabled and task.wait() do
-                pcall(function()
-                    game:GetService("VirtualUser"):ClickButton1(Vector2.new(9e9, 9e9))
-                end)
             end
         end))
     else
@@ -323,29 +334,25 @@ toggleButton.MouseButton1Click:Connect(function()
         if classCheckConnection then classCheckConnection:Disconnect() end
         
         for _, loop in pairs(runningLoops) do
-    pcall(function()
-        if coroutine.status(loop) == "suspended" then
             task.cancel(loop)
         end
-    end)
-end
-
         runningLoops = {}
     end
     
     debounce = false
+end
+
+-- Connect UI events
+closeButton.MouseButton1Click:Connect(function()
+    frame.Visible = false
 end)
 
--- Cleanup
+toggleButton.MouseButton1Click:Connect(toggleAutoFarm)
+
+-- Initial cleanup
 if muscleConnection then muscleConnection:Disconnect() end
 if classCheckConnection then classCheckConnection:Disconnect() end
-
 for _, loop in pairs(runningLoops) do
-    pcall(function()
-        if coroutine.status(loop) == "suspended" then
-            task.cancel(loop)
-        end
-    end)
+    task.cancel(loop)
 end
 runningLoops = {}
-
