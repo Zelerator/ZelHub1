@@ -30,9 +30,9 @@ table.sort(CLASS_HIERARCHY, function(a, b)
     return SELL_THRESHOLDS[a] < SELL_THRESHOLDS[b]
 end)
 
-local BLACKLIST = {"Athena", "Cronus", "Hades", "Hercules", "Poseidon", "Zeus", "Ares", "Fist", "Foot"}
+local BLACKLIST = {"Athena", "Cronus", "Hades", "Hercules", "Poseidon", "Zeus", "Ares", "Fist", "Foot", "Weight"}
 
--- Performance-optimized variables
+-- Performance variables
 local autoSellEnabled = false
 local currentClass = nil
 local muscleConnection, classCheckConnection
@@ -40,6 +40,7 @@ local runningLoops = {}
 local debounce = false
 local itemCache = {}
 local lastCacheUpdate = 0
+local lastMuscleCheck = 0
 
 -- GUI Setup
 local screenGui = Instance.new("ScreenGui")
@@ -127,14 +128,13 @@ closeButton.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
 closeButton.BorderSizePixel = 0
 closeButton.Parent = frame
 
--- Optimized Item Checking System
+-- Optimized Item Checking
 local function updateItemCache()
     local now = os.clock()
-    if now - lastCacheUpdate < 2 then return end -- Only update cache every 2 seconds
+    if now - lastCacheUpdate < 2 then return end
+    lastCacheUpdate = now
     
-    itemCache = {} -- Reset cache
-    
-    -- Check Backpack
+    itemCache = {}
     local backpack = player:FindFirstChild("Backpack")
     if backpack then
         for _, item in ipairs(backpack:GetChildren()) do
@@ -144,17 +144,14 @@ local function updateItemCache()
         end
     end
 
-    -- Check Character
     local character = player.Character
     if character then
-        -- Check tools in character
         for _, item in ipairs(character:GetChildren()) do
             if item:IsA("Tool") then
                 itemCache[item.Name] = true
             end
         end
 
-        -- Check equipped tool
         local humanoid = character:FindFirstChildOfClass("Humanoid")
         if humanoid then
             local equipped = humanoid:FindFirstChildOfClass("Tool")
@@ -163,19 +160,16 @@ local function updateItemCache()
             end
         end
 
-        -- Check for class parts
         for _, part in ipairs(character:GetDescendants()) do
             if part:IsA("BasePart") and SELL_THRESHOLDS[part.Name] then
                 itemCache[part.Name] = true
             end
         end
     end
-    
-    lastCacheUpdate = now
 end
 
 local function hasItem(itemName)
-    updateItemCache() -- Updates cache (throttled)
+    updateItemCache()
     return itemCache[itemName] == true
 end
 
@@ -204,39 +198,20 @@ end
 
 -- Muscle Selling
 local function checkAndSellMuscle()
-    if not currentClass then 
-        print("No class detected - can't sell")
-        return 
-    end
+    if not currentClass then return end
     
     local leaderstats = player:FindFirstChild("leaderstats")
-    if not leaderstats then
-        print("Leaderstats not found!")
-        return
-    end
+    if not leaderstats then return end
     
     local muscle = leaderstats:FindFirstChild("Muscle")
-    if not muscle then
-        print("Muscle value not found!")
-        return
-    end
+    if not muscle then return end
     
     local threshold = SELL_THRESHOLDS[currentClass]
-    print("Muscle Check:", muscle.Value, "/", threshold) -- This line was missing
-    
     if muscle.Value >= threshold then
         local args = {[1] = {[1] = "SellMuscle"}}
-        
-        print("Attempting to sell muscle...")
-        local success, err = pcall(function()
+        pcall(function()
             ReplicatedStorage:WaitForChild("RemoteEvent"):FireServer(unpack(args))
         end)
-        
-        if success then
-            print("Successfully sold muscle!")
-        else
-            print("Sell failed:", err)
-        end
     end
 end
 
@@ -247,14 +222,14 @@ local function startClassChecker()
     local checkCounter = 0
     classCheckConnection = RunService.Heartbeat:Connect(function()
         checkCounter += 1
-        if checkCounter >= 30 then -- Check every 30 frames (~0.5s at 60fps)
+        if checkCounter >= 30 then
             checkCounter = 0
             pcall(updateCurrentClass)
         end
     end)
 end
 
--- Tool Management
+-- Tool Management with Stage 29+ Behavior
 local function manageTools()
     if not autoSellEnabled then return end
     
@@ -267,21 +242,44 @@ local function manageTools()
     local backpack = player:FindFirstChild("Backpack")
     if not backpack then return end
     
-    -- Equip non-blacklisted tools
-    for _, item in ipairs(backpack:GetChildren()) do
-        if item:IsA("Tool") and not table.find(BLACKLIST, item.Name) then
-            pcall(function() humanoid:EquipTool(item) end)
-        end
-    end
-    
-    -- Special foot handling
+    -- Check stage
     local leaderstats = player:FindFirstChild("leaderstats")
     local stage = leaderstats and leaderstats:FindFirstChild("Stage")
-    if stage and stage.Value >= 29 then
+    local isHighStage = stage and stage.Value >= 29
+    
+    if isHighStage then
+        -- Stage 29+ Behavior: Weight for 10s -> Foot for 0.5s
         local foot = backpack:FindFirstChild("Foot")
+        local weight = backpack:FindFirstChild("Weight")
+        
+        -- Unequip everything first
+        for _, tool in ipairs(character:GetChildren()) do
+            if tool:IsA("Tool") then
+                tool.Parent = backpack
+            end
+        end
+        
+        -- Weight Phase (10 seconds)
+        if weight then
+            humanoid:EquipTool(weight)
+            local startTime = os.clock()
+            while os.clock() - startTime < 10 and autoSellEnabled do
+                task.wait()
+            end
+        end
+        
+        -- Foot Phase (0.5 seconds)
         if foot then
+            humanoid:EquipTool(foot)
             task.wait(0.5)
-            pcall(function() humanoid:EquipTool(foot) end)
+            foot.Parent = backpack
+        end
+    else
+        -- Normal Behavior: Equip all non-blacklisted tools
+        for _, item in ipairs(backpack:GetChildren()) do
+            if item:IsA("Tool") and not table.find(BLACKLIST, item.Name) then
+                pcall(function() humanoid:EquipTool(item) end)
+            end
         end
     end
 end
@@ -303,23 +301,28 @@ local function toggleAutoFarm()
         -- Muscle monitoring
         local leaderstats = player:FindFirstChild("leaderstats")
         if leaderstats and leaderstats:FindFirstChild("Muscle") then
-            muscleConnection = leaderstats.Muscle:GetPropertyChangedSignal("Value"):Connect(checkAndSellMuscle)
+            muscleConnection = leaderstats.Muscle:GetPropertyChangedSignal("Value"):Connect(function()
+                if os.clock() - lastMuscleCheck >= 0.5 then
+                    lastMuscleCheck = os.clock()
+                    checkAndSellMuscle()
+                end
+            end)
         end
 
-        -- Optimized tool management
+        -- Tool management loop
         table.insert(runningLoops, task.spawn(function()
             while autoSellEnabled do
                 pcall(manageTools)
-                task.wait(5) -- Reduced frequency
+                task.wait(0.1)
             end
         end))
         
-        -- Optimized auto-clicker
+        -- Auto-clicker
         table.insert(runningLoops, task.spawn(function()
             while autoSellEnabled do
                 pcall(function()
                     game:GetService("VirtualUser"):ClickButton1(Vector2.new(9e9, 9e9))
-                    task.wait(0.1) -- Added delay
+                    task.wait(0.1)
                 end)
                 task.wait()
             end
