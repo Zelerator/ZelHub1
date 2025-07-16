@@ -5,6 +5,7 @@ If stage is 29+ then it will switch between weight and stomp every 10 seconds of
     Auto Buy Weight
     Change GUI
     Status System (It will say my stage, current weight, and who are in the server with the user)
+    
 */
 
 local Players = game:GetService("Players")
@@ -16,19 +17,51 @@ local player = Players.LocalPlayer
 
 -- Class thresholds
 local SELL_THRESHOLDS = {
-    ["Godly 1st Class"] = 4.015e59, ["Godly 2nd Class"] = 9.8e60, ["Godly 3rd Class"] = 1.395e62,
-    ["Godly 4th Class"] = 3.555e62, ["Godly 5th Class"] = 9.55e63, ["Godly 6th Class"] = 1.11e65,
-    ["Godly 7th Class"] = 2.995e65, ["Godly 8th Class"] = 7.75e66, ["Godly 9th Class"] = 1.75e69,
-    ["1ST SUPER CLASS"] = 1.06e70, ["2ND SUPER CLASS"] = 6.45e70, ["3RD SUPER CLASS"] = 3.995e71,
-    ["4TH SUPER CLASS"] = 2.625e72, ["5TH SUPER CLASS"] = 1.675e73, ["6TH SUPER CLASS"] = 0.575e78,
-    ["7TH SUPER CLASS"] = 3.6e78, ["8TH SUPER CLASS"] = 7.5e78, ["9TH SUPER CLASS"] = 132.5e78,
-    ["10TH SUPER CLASS"] = 0.795e81, ["11TH SUPER CLASS"] = 4.665e81,
-    ["1ST ULTIMATE CLASS"] = 1.825e84, ["2ND ULTIMATE CLASS"] = 10.8e84, ["3RD ULTIMATE CLASS"] = 64.5e84,
-    ["4TH ULTIMATE CLASS"] = 366.5e84, ["5TH ULTIMATE CLASS"] = 32.165e87, ["6TH ULTIMATE CLASS"] = 12.75e87,
-    ["7TH ULTIMATE CLASS"] = 38.5e90, ["8TH ULTIMATE CLASS"] = 38.5e90, ["9TH ULTIMATE CLASS"] = 1.275e93,
-    ["1ST SUPREME CLASS"] = 7.5e93, ["2ND SUPREME CLASS"] = 44.75e93, ["3RD SUPREME CLASS"] = 262.5e93,
-    ["4TH SUPREME CLASS"] = 8.45e96, ["5TH SUPREME CLASS"] = 50e96, ["6TH SUPREME CLASS"] = 297.5e96,
-    ["7TH SUPREME CLASS"] = 1.875e99, ["8TH SUPREME CLASS"] = 11.5e99, ["9TH SUPREME CLASS"] = 77.5e99
+    -- GODLY CLASSES
+["Godly 1st Class"] = 1.2045e57,
+["Godly 2nd Class"] = 1.71e59,
+["Godly 3rd Class"] = 4.015e59,
+["Godly 4th Class"] = 9.8e59,
+["Godly 5th Class"] = 1.395e62,
+["Godly 6th Class"] = 3.555e62,
+["Godly 7th Class"] = 2.995e63,
+["Godly 8th Class"] = 7.75e65,
+["Godly 9th Class"] = 1.675e69,
+
+-- SUPER CLASSES
+["1ST SUPER CLASS"] = 1.06e70,
+["2ND SUPER CLASS"] = 6.45e70,
+["3RD SUPER CLASS"] = 3.995e71,
+["4TH SUPER CLASS"] = 2.625e72,
+["5TH SUPER CLASS"] = 1.675e73,
+["6TH SUPER CLASS"] = 5.75e77,
+["7TH SUPER CLASS"] = 3.6e78,
+["8TH SUPER CLASS"] = 2.15e79,
+["9TH SUPER CLASS"] = 1.325e80,
+["10TH SUPER CLASS"] = 7.95e80,
+["11TH SUPER CLASS"] = 4.665e81,
+
+-- ULTIMATE CLASSES
+["1ST ULTIMATE CLASS"] = 1.825e87,
+["2ND ULTIMATE CLASS"] = 1.08e88,
+["3RD ULTIMATE CLASS"] = 6.45e88,
+["4TH ULTIMATE CLASS"] = 3.665e89,
+["5TH ULTIMATE CLASS"] = 2.165e90,
+["6TH ULTIMATE CLASS"] = 1.275e91,
+["7TH ULTIMATE CLASS"] = 3.83e97,
+["8TH ULTIMATE CLASS"] = 2.125e98,
+["9TH ULTIMATE CLASS"] = 1.275e99,
+
+-- SUPREME CLASSES
+["1ST SUPREME CLASS"] = 7.5e99,
+["2ND SUPREME CLASS"] = 4.475e100,
+["3RD SUPREME CLASS"] = 2.625e101,
+["4TH SUPREME CLASS"] = 8.45e105,
+["5TH SUPREME CLASS"] = 5e106,
+["6TH SUPREME CLASS"] = 2.975e107,
+["7TH SUPREME CLASS"] = 1.875e111,
+["8TH SUPREME CLASS"] = 1.15e112,
+["9TH SUPREME CLASS"] = 7.75e112
 }
 
 local CLASS_HIERARCHY = {}
