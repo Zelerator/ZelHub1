@@ -1,13 +1,3 @@
-/*this script should auto equip weight, auto click, if muscle value is 50% of the next weight cost it will Sell muscle. 
-If stage is 29+ then it will switch between weight and stomp every 10 seconds of weight, 500 miliseconds of stomp.
-    Future Plans:
-    Pencil to USC
-    Auto Buy Weight
-    Change GUI
-    Status System (It will say my stage, current weight, and who are in the server with the user)
-    
-*/
-
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local UserInputService = game:GetService("UserInputService")
@@ -15,53 +5,60 @@ local RunService = game:GetService("RunService")
 
 local player = Players.LocalPlayer
 
--- Class thresholds
+-- Configuration
+local CONFIG = {
+    StageSwitchThreshold = 35,
+    WeightDuration = 10,
+    StompDuration = 0.5
+}
+
+-- Class thresholds (already at 50% of original game values)
 local SELL_THRESHOLDS = {
     -- GODLY CLASSES
-["Godly 1st Class"] = 1.2045e57,
-["Godly 2nd Class"] = 1.71e59,
-["Godly 3rd Class"] = 4.015e59,
-["Godly 4th Class"] = 9.8e59,
-["Godly 5th Class"] = 1.395e62,
-["Godly 6th Class"] = 3.555e62,
-["Godly 7th Class"] = 2.995e63,
-["Godly 8th Class"] = 7.75e65,
-["Godly 9th Class"] = 1.675e69,
+    ["Godly 1st Class"] = 4.1e59,
+    ["Godly 2nd Class"] = 9.8e59,
+    ["Godly 3rd Class"] = 1.395e62,
+    ["Godly 4th Class"] = 9.8e62,
+    ["Godly 5th Class"] = 9.55e62,
+    ["Godly 6th Class"] = 1.11e65,
+    ["Godly 7th Class"] = 35e65,
+    ["Godly 8th Class"] = 7.75e65,
+    ["Godly 9th Class"] = 1.675e69,
 
--- SUPER CLASSES
-["1ST SUPER CLASS"] = 1.06e70,
-["2ND SUPER CLASS"] = 6.45e70,
-["3RD SUPER CLASS"] = 3.995e71,
-["4TH SUPER CLASS"] = 2.625e72,
-["5TH SUPER CLASS"] = 1.675e73,
-["6TH SUPER CLASS"] = 5.75e77,
-["7TH SUPER CLASS"] = 3.6e78,
-["8TH SUPER CLASS"] = 2.15e79,
-["9TH SUPER CLASS"] = 1.325e80,
-["10TH SUPER CLASS"] = 7.95e80,
-["11TH SUPER CLASS"] = 4.665e81,
+    -- SUPER CLASSES
+    ["1ST SUPER CLASS"] = 1.06e70,
+    ["2ND SUPER CLASS"] = 6.45e70,
+    ["3RD SUPER CLASS"] = 45e71,
+    ["4TH SUPER CLASS"] = 2.625e72,
+    ["5TH SUPER CLASS"] = 1.675e73,
+    ["6TH SUPER CLASS"] = 5.75e77,
+    ["7TH SUPER CLASS"] = 3.6e78,
+    ["8TH SUPER CLASS"] = 2.15e79,
+    ["9TH SUPER CLASS"] = 1.325e80,
+    ["10TH SUPER CLASS"] = 8.00e80,
+    ["11TH SUPER CLASS"] = 4.665e81,
 
--- ULTIMATE CLASSES
-["1ST ULTIMATE CLASS"] = 1.825e87,
-["2ND ULTIMATE CLASS"] = 1.08e88,
-["3RD ULTIMATE CLASS"] = 6.45e88,
-["4TH ULTIMATE CLASS"] = 3.665e89,
-["5TH ULTIMATE CLASS"] = 2.165e90,
-["6TH ULTIMATE CLASS"] = 1.275e91, 
-["7TH ULTIMATE CLASS"] = 3.83e97, -- 38.3        utg
-["8TH ULTIMATE CLASS"] = 2.125e98,-- 212.5       utg
-["9TH ULTIMATE CLASS"] = 1.275e99,-- 1.275       dtg
+    -- ULTIMATE CLASSES
+    ["1ST ULTIMATE CLASS"] = 1.825e87,
+    ["2ND ULTIMATE CLASS"] = 1.08e88,
+    ["3RD ULTIMATE CLASS"] = 6.45e88,
+    ["4TH ULTIMATE CLASS"] = 3.665e89,
+    ["5TH ULTIMATE CLASS"] = 2.165e90,
+    ["6TH ULTIMATE CLASS"] = 1.275e91,
+    ["7TH ULTIMATE CLASS"] = 3.83e97,
+    ["8TH ULTIMATE CLASS"] = 2.125e98,
+    ["9TH ULTIMATE CLASS"] = 1.275e99,
 
--- SUPREME CLASSES
-["1ST SUPREME CLASS"] = 7.5e99,    -- 7.5        dtg
-["2ND SUPREME CLASS"] = 4.475e100, -- 44.75      dtg
-["3RD SUPREME CLASS"] = 2.625e101, -- 262.5      dtg
-["4TH SUPREME CLASS"] = 8.45e108,   -- 8.45      qitg
-["5TH SUPREME CLASS"] = 5e109,     -- 50         qitg
-["6TH SUPREME CLASS"] = 2.975e110, -- 297.5      qitg
-["7TH SUPREME CLASS"] = 1.875e111, -- 1.875      sxtg
-["8TH SUPREME CLASS"] = 1.15e112, -- 11.5        sxtg
-["9TH SUPREME CLASS"] = 7.75e112 -- 77.5         sxtg
+    -- SUPREME CLASSES
+    ["1ST SUPREME CLASS"] = 7.5e99,
+    ["2ND SUPREME CLASS"] = 4.475e100,
+    ["3RD SUPREME CLASS"] = 2.625e101,
+    ["4TH SUPREME CLASS"] = 8.45e108,
+    ["5TH SUPREME CLASS"] = 5e109,
+    ["6TH SUPREME CLASS"] = 2.975e110,
+    ["7TH SUPREME CLASS"] = 1.875e111,
+    ["8TH SUPREME CLASS"] = 1.15e112,
+    ["9TH SUPREME CLASS"] = 7.75e112
 }
 
 local CLASS_HIERARCHY = {}
@@ -172,7 +169,7 @@ closeButton.Parent = frame
 -- Optimized Item Checking System
 local function updateItemCache()
     local now = os.clock()
-    if now - lastCacheUpdate < 2 then return end -- Only update cache every 2 seconds
+    if now - lastCacheUpdate < 2 then return end
     
     itemCache = {} -- Reset cache
     
@@ -217,7 +214,7 @@ local function updateItemCache()
 end
 
 local function hasItem(itemName)
-    updateItemCache() -- Updates cache (throttled)
+    updateItemCache()
     return itemCache[itemName] == true
 end
 
@@ -244,41 +241,23 @@ local function updateCurrentClass()
     end
 end
 
--- Muscle Selling
+-- Muscle Selling (uses direct thresholds)
 local function checkAndSellMuscle()
-    if not currentClass then 
-        print("No class detected - can't sell")
-        return 
-    end
+    if not currentClass then return end
     
     local leaderstats = player:FindFirstChild("leaderstats")
-    if not leaderstats then
-        print("Leaderstats not found!")
-        return
-    end
+    if not leaderstats then return end
     
     local muscle = leaderstats:FindFirstChild("Muscle")
-    if not muscle then
-        print("Muscle value not found!")
-        return
-    end
+    if not muscle then return end
     
     local threshold = SELL_THRESHOLDS[currentClass]
-    print("Muscle Check:", muscle.Value, "/", threshold) -- This line was missing
     
     if muscle.Value >= threshold then
         local args = {[1] = {[1] = "SellMuscle"}}
-        
-        print("Attempting to sell muscle...")
-        local success, err = pcall(function()
+        pcall(function()
             ReplicatedStorage:WaitForChild("RemoteEvent"):FireServer(unpack(args))
         end)
-        
-        if success then
-            print("Successfully sold muscle!")
-        else
-            print("Sell failed:", err)
-        end
     end
 end
 
@@ -296,7 +275,7 @@ local function startClassChecker()
     end)
 end
 
--- Tool Management
+-- Tool Management with Stage 35+ switching
 local function manageTools()
     if not autoSellEnabled then return end
     
@@ -309,17 +288,37 @@ local function manageTools()
     local backpack = player:FindFirstChild("Backpack")
     if not backpack then return end
     
-    -- Equip non-blacklisted tools
+    -- Get stage info
+    local leaderstats = player:FindFirstChild("leaderstats")
+    local stage = leaderstats and leaderstats:FindFirstChild("Stage")
+    local currentStage = stage and stage.Value or 0
+    
+    -- Stage 35+ weight/stomp switching
+    if currentStage >= CONFIG.StageSwitchThreshold then
+        local weight = backpack:FindFirstChild("Weight")
+        local stomp = backpack:FindFirstChild("Stomp")
+        
+        if weight and stomp then
+            -- Equip weight for 10 seconds
+            humanoid:EquipTool(weight)
+            task.wait(CONFIG.WeightDuration)
+            
+            -- Equip stomp for 0.5 seconds
+            humanoid:EquipTool(stomp)
+            task.wait(CONFIG.StompDuration)
+            return
+        end
+    end
+    
+    -- Normal tool management for stages below 35
     for _, item in ipairs(backpack:GetChildren()) do
         if item:IsA("Tool") and not table.find(BLACKLIST, item.Name) then
             pcall(function() humanoid:EquipTool(item) end)
         end
     end
     
-    -- Special foot handling
-    local leaderstats = player:FindFirstChild("leaderstats")
-    local stage = leaderstats and leaderstats:FindFirstChild("Stage")
-    if stage and stage.Value >= 35 then
+    -- Special foot handling at stage 35+
+    if currentStage >= 35 then
         local foot = backpack:FindFirstChild("Foot")
         if foot then
             task.wait(0.5)
@@ -348,20 +347,20 @@ local function toggleAutoFarm()
             muscleConnection = leaderstats.Muscle:GetPropertyChangedSignal("Value"):Connect(checkAndSellMuscle)
         end
 
-        -- Optimized tool management
+        -- Tool management
         table.insert(runningLoops, task.spawn(function()
             while autoSellEnabled do
                 pcall(manageTools)
-                task.wait(5) -- Reduced frequency
+                task.wait(5)
             end
         end))
         
-        -- Optimized auto-clicker
+        -- Auto-clicker
         table.insert(runningLoops, task.spawn(function()
             while autoSellEnabled do
                 pcall(function()
                     game:GetService("VirtualUser"):ClickButton1(Vector2.new(9e9, 9e9))
-                    task.wait(0.1) -- Added delay
+                    task.wait(0.1)
                 end)
                 task.wait()
             end
